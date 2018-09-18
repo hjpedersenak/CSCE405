@@ -25,6 +25,11 @@ public class PuzzleState
         return state;
     }
     
+    public int readPosValue(int pos)
+    {
+        return state[pos];
+    }
+    
     public void printPuzzle()
     {
         System.out.println(state[0] + " " + state [1] + " " + state[2] + "\n" 

@@ -10,6 +10,11 @@ public class Node implements Comparable<Node>
         nodeState = newPuzzle;
     }
     
+    public int readPosValue(int pos)
+    {
+        return nodeState.readPosValue(pos);
+    }
+    
     public int compareTo(Node node)
     {
         if(this.readF() < node.readF())

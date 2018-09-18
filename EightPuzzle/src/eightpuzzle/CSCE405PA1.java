@@ -73,10 +73,28 @@ public class CSCE405PA1
         keyboard.close();
     }
     
-    public void checkParity(PuzzleState start, PuzzleState goal)
+    public int calcMisplacedH(Node current, PuzzleState goal)
+    {
+        int hVal = 0;
+        for(int i = 0; i < 9; i++)
+        {
+            if(current.readPosValue(i) != goal.readPosValue(i))
+                hVal++;
+        }
+        return hVal;
+    }    
+    
+    public int calcManhattanH()
+    {
+        int hVal = 0;
+        //calculation here
+        return hVal;
+    }
+    
+/*    public void checkParity(PuzzleState start, PuzzleState goal)
     {
         
-    }
+    }*/
     
     
     
