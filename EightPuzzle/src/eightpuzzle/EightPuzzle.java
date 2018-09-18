@@ -22,6 +22,8 @@ public class EightPuzzle {
 //    public void 
             
     public static void main(String[] args) {
+        System.out.println("Welcome to the eight puzzle game, please enter your start state.\n"
+                + "(note: the empty block should be denoted as a 0.");
         // main function contains user initialization of start and goal states
         // help from https://stackoverflow.com/questions/27654491/trying-to-fill-a-2d-array-by-user-input-how-to-do-it
         int row = 3;
@@ -39,6 +41,9 @@ public class EightPuzzle {
                 num++;
             }
         }
+        
+        System.out.println("Please enter your goal state.\n"
+                + "(note: the empty block should be denoted as a 0.");
 
         for (row = 0; row < goalState.length; row++) {
             for (col = 0; col < goalState[row].length; col++) {
