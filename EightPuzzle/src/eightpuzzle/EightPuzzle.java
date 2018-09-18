@@ -30,14 +30,14 @@ public class EightPuzzle {
         int col = 3;
         int num = 1;
         int num2 = 1;
-        int[][] startState = new int[row][col];
-        int[][] goalState = new int[row][col];
+        char[][] startState = new char[row][col];
+        char[][] goalState = new char[row][col];
         Scanner in = new Scanner(System.in);
 
         for (row = 0; row < startState.length; row++) {
             for (col = 0; col < startState[row].length; col++) {
                 System.out.println("Enter element " + num + " for the puzzle");
-                startState[row][col] = in.nextInt();
+                startState[row][col] = in.nextLine().charAt(0);
                 num++;
             }
         }
@@ -48,7 +48,7 @@ public class EightPuzzle {
         for (row = 0; row < goalState.length; row++) {
             for (col = 0; col < goalState[row].length; col++) {
                 System.out.println("Enter element " + num2 + " for the puzzle");
-                goalState[row][col] = in.nextInt();
+                goalState[row][col] = in.nextLine().charAt(0);
                 num2++;
             }
         }
