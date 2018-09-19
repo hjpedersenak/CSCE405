@@ -31,6 +31,11 @@ public class Node implements Comparable<Node>
         }
     }
     
+    public int[] searchBoard(int target)
+    {
+        return nodeState.searchBoard(target);
+    }
+    
     public void setG(int g)
     {
         valG = g;

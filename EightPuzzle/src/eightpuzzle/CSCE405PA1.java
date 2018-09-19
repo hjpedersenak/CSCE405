@@ -12,6 +12,8 @@ public class CSCE405PA1
         char searchSelection = 'e';
         char correctPuz = 'n';
         String stringStart, stringGoal;
+        PuzzleState goalState;
+        PuzzleState startState;
         
         System.out.println("Welcome to the 8-Puzzle solver.");
         
@@ -24,12 +26,12 @@ public class CSCE405PA1
                     + "'#########', entering numbers from left to right, then top to bottom.\n"
                         + "Please indicate the BLANK with a 0.");
                 stringStart = keyboard.nextLine();
-                PuzzleState startState = new PuzzleState(stringStart);
+                startState = new PuzzleState(stringStart);
                 System.out.println("Please enter your puzzle's GOAL state in the form\n"
                     + "'#########', entering numbers from left to right, then top to bottom.\n"
                         + "Please indicate the BLANK with a 0.");
                 stringGoal = keyboard.nextLine();
-                PuzzleState goalState = new PuzzleState(stringGoal);
+                goalState = new PuzzleState(stringGoal);
                 System.out.println("You entered this START state:");
                 startState.printPuzzle();
                 System.out.println("You entered this GOAL state:");
@@ -38,6 +40,16 @@ public class CSCE405PA1
                 correctPuz = keyboard.nextLine().toLowerCase().charAt(0);
             }
             while(correctPuz == 'n');
+            
+            ///////testing
+            /*
+            Node startNode = new Node(startState);
+            System.out.println("The Misplaced Tiles value of the start state is "
+                    + calcMisplacedH(startNode, goalState));
+            System.out.println("The Manhattan Distance value of the start state is "
+                    + calcManhattanH(startNode, goalState));
+            */
+            ///////testing complete
             
             System.out.println("How do you want to solve the search?\n"
                     + "Please choose an option by its letter:\n"
@@ -73,7 +85,7 @@ public class CSCE405PA1
         keyboard.close();
     }
     
-    public int calcMisplacedH(Node current, PuzzleState goal)
+    public static int calcMisplacedH(Node current, PuzzleState goal)
     {
         int hVal = 0;
         for(int i = 0; i < 9; i++)
@@ -84,10 +96,19 @@ public class CSCE405PA1
         return hVal;
     }    
     
-    public int calcManhattanH()
+    //referenced https://stackoverflow.com/questions/8224470/calculating-manhattan-distance
+    public static int calcManhattanH(Node current, PuzzleState goal)
     {
         int hVal = 0;
-        //calculation here
+        int[] currentPos = new int[2];
+        int[] goalPos = new int[2];
+        
+        for(int i = 1; i < 9; i++) //searching for each digit in turn, skipping blank
+        {
+            currentPos = current.searchBoard(i);
+            goalPos = goal.searchBoard(i);
+            hVal = hVal + (Math.abs(currentPos[0]-goalPos[0]) + Math.abs(currentPos[1]-goalPos[1]));
+        }
         return hVal;
     }
     

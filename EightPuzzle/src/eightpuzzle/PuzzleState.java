@@ -30,6 +30,60 @@ public class PuzzleState
         return state[pos];
     }
     
+    public int[] searchBoard(int target) //should return the x pos in result[0] and the y pos in result[1]
+    {
+        int[] result = new int[2];
+        int position = -1;
+        for(int i = 0; i < 9; i++)
+        {
+            if(state[i] == target)
+                position = i;
+        }
+        switch(position)
+        {
+            case 0:
+                result[0] = 0;
+                result[1] = 0;
+                break;
+            case 1:
+                result[0] = 0;
+                result[1] = 1;
+                break;
+            case 2:
+                result[0] = 0;
+                result[1] = 2;
+                break;
+            case 3:
+                result[0] = 1;
+                result[1] = 0;
+                break;
+            case 4:
+                result[0] = 1;
+                result[1] = 1;
+                break;
+            case 5:
+                result[0] = 1;
+                result[1] = 2;
+                break;
+            case 6:
+                result[0] = 2;
+                result[1] = 0;
+                break;
+            case 7:
+                result[0] = 2;
+                result[1] = 1;
+                break;
+            case 8:
+                result[0] = 2;
+                result[1] = 2;
+                break;
+            default:
+                System.out.println("Error in searchBoard method.");
+                break;
+        }
+        return result;
+    }
+    
     public void printPuzzle()
     {
         System.out.println(state[0] + " " + state [1] + " " + state[2] + "\n" 
