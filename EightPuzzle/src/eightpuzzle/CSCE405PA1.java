@@ -1,4 +1,4 @@
-package csce.pkg405.pa1;
+package eightpuzzle;
 
 import java.util.*;
 
@@ -62,6 +62,7 @@ public class CSCE405PA1
             {
                 case 'a': 
                     System.out.println("You chose A.");
+                    BreadthFirst bf = new BreadthFirst(new Node(startState), new Node(goalState));
                     break;
                 case 'b': 
                     System.out.println("You chose B. Not implemented.");

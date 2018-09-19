@@ -1,5 +1,5 @@
 
-package csce.pkg405.pa1;
+package eightpuzzle;
 
 import java.lang.Character;
 
@@ -17,7 +17,10 @@ public class PuzzleState
     
     public PuzzleState(PuzzleState oldState)
     {
-        state = oldState.getState();
+        for (int i = 0; i < 9; i++)
+        {
+            state[i] = oldState.getState()[i];
+        }
     }
     
     public int[] getState()
@@ -30,15 +33,21 @@ public class PuzzleState
         return state[pos];
     }
     
-    public int[] searchBoard(int target) //should return the x pos in result[0] and the y pos in result[1]
+    public int findNumber(int target)
     {
-        int[] result = new int[2];
         int position = -1;
         for(int i = 0; i < 9; i++)
         {
             if(state[i] == target)
                 position = i;
         }
+        return position;
+    }
+    
+    public int[] searchBoard(int target) //should return the x pos in result[0] and the y pos in result[1]
+    {
+        int[] result = new int[2];
+        int position = findNumber(target);
         switch(position)
         {
             case 0:
@@ -86,9 +95,19 @@ public class PuzzleState
     
     public void printPuzzle()
     {
-        System.out.println(state[0] + " " + state [1] + " " + state[2] + "\n" 
-        + state[3] + " " + state[4] + " " + state[5] + "\n"
-        + state[6] + " " + state[7] + " " + state[8]);
+        for (int i = 0; i < 9; i++)
+        {
+            if (state[i] == 0)
+                System.out.print("_ ");
+            else
+                System.out.print(state[i] + " ");
+            if(i%3 == 2)
+                System.out.println();
+        }
+        System.out.println();
+//        System.out.println(state[0] + " " + state [1] + " " + state[2] + "\n" 
+//        + state[3] + " " + state[4] + " " + state[5] + "\n"
+//        + state[6] + " " + state[7] + " " + state[8]);
     }
     
     public int getParity()
@@ -117,7 +136,7 @@ public class PuzzleState
                 {
                     temp = state[positionBlank];
                     state[positionBlank] = state[positionNew];
-                    state[positionNew] = state[positionBlank];
+                    state[positionNew] = temp;
                 }
                 else
                 {
@@ -130,7 +149,7 @@ public class PuzzleState
                 {
                     temp = state[positionBlank];
                     state[positionBlank] = state[positionNew];
-                    state[positionNew] = state[positionBlank];
+                    state[positionNew] = temp;
                 }
                 else
                 {
@@ -143,7 +162,7 @@ public class PuzzleState
                 {
                     temp = state[positionBlank];
                     state[positionBlank] = state[positionNew];
-                    state[positionNew] = state[positionBlank];
+                    state[positionNew] = temp;
                 }
                 else
                 {
@@ -156,7 +175,7 @@ public class PuzzleState
                 {
                     temp = state[positionBlank];
                     state[positionBlank] = state[positionNew];
-                    state[positionNew] = state[positionBlank];
+                    state[positionNew] = temp;
                 }
                 else
                 {
@@ -170,7 +189,7 @@ public class PuzzleState
                 {
                     temp = state[positionBlank];
                     state[positionBlank] = state[positionNew];
-                    state[positionNew] = state[positionBlank];
+                    state[positionNew] = temp;
                 }
                 else
                 {
@@ -183,7 +202,7 @@ public class PuzzleState
                 {
                     temp = state[positionBlank];
                     state[positionBlank] = state[positionNew];
-                    state[positionNew] = state[positionBlank];
+                    state[positionNew] = temp;
                 }
                 else
                 {
@@ -196,7 +215,7 @@ public class PuzzleState
                 {
                     temp = state[positionBlank];
                     state[positionBlank] = state[positionNew];
-                    state[positionNew] = state[positionBlank];
+                    state[positionNew] = temp;
                 }
                 else
                 {
@@ -209,7 +228,7 @@ public class PuzzleState
                 {
                     temp = state[positionBlank];
                     state[positionBlank] = state[positionNew];
-                    state[positionNew] = state[positionBlank];
+                    state[positionNew] = temp;
                 }
                 else
                 {
@@ -222,7 +241,7 @@ public class PuzzleState
                 {
                     temp = state[positionBlank];
                     state[positionBlank] = state[positionNew];
-                    state[positionNew] = state[positionBlank];
+                    state[positionNew] = temp;
                 }
                 else
                 {

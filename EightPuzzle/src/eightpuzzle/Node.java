@@ -1,13 +1,45 @@
-package csce.pkg405.pa1;
+package eightpuzzle;
 
+import java.util.*;
 public class Node implements Comparable<Node>
 {
     private int valG, valH, valF = 0;
     PuzzleState nodeState;
+    private ArrayList<PuzzleState> steps; // This variable is used to record previous steps - Nico
     
     public Node(PuzzleState newPuzzle)
     {
         nodeState = newPuzzle;
+        steps = new ArrayList<PuzzleState>();
+    }
+    
+    public Node(PuzzleState newPuzzle, ArrayList<PuzzleState> steps)
+    {
+        nodeState = newPuzzle;
+        this.steps = new ArrayList<PuzzleState>(steps);
+    }
+    
+    public void addStep(PuzzleState oldState) // add previous step (parent)
+    {
+        steps.add(oldState);
+    }
+    
+    public ArrayList<PuzzleState> getSteps()
+    {
+        return steps;
+    }
+    
+    public void printSteps()
+    {
+        for(int i = 0; i < steps.size(); i++)
+        {
+            steps.get(i).printPuzzle();
+        }
+    }
+    
+    public PuzzleState getPuzzleState()
+    {
+        return nodeState;
     }
     
     public int readPosValue(int pos)

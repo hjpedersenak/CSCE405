@@ -37,29 +37,33 @@ public class BreadthFirst {
         {
             current = queue.get(0);
             queue.remove(0); // first out
-            moveBlankUp(current.getPuzzleState().findNumber(blank), new PuzzleState(current.getPuzzleState())); // need to make deep copy
+//            moveBlankUp(current.getPuzzleState().findNumber(blank), new PuzzleState(current.getPuzzleState())); // need to make deep copy
+            moveBlankUp(current.getPuzzleState().findNumber(blank), new Node(new PuzzleState(current.getPuzzleState()), current.getSteps())); // need to make deep copy
             if (pathFound)
             {
                 report();
-                return;
+                break;
             }
-            moveBlankDown(current.getPuzzleState().findNumber(blank), new PuzzleState(current.getPuzzleState()));
+//            moveBlankDown(current.getPuzzleState().findNumber(blank), new PuzzleState(current.getPuzzleState()));
+            moveBlankDown(current.getPuzzleState().findNumber(blank), new Node(new PuzzleState(current.getPuzzleState()), current.getSteps())); // need to make deep copy
             if (pathFound)
             {
                 report();
-                return;
+                break;
             }
-            moveBlankLeft(current.getPuzzleState().findNumber(blank), new PuzzleState(current.getPuzzleState()));
+//            moveBlankLeft(current.getPuzzleState().findNumber(blank), new PuzzleState(current.getPuzzleState()));
+            moveBlankLeft(current.getPuzzleState().findNumber(blank), new Node(new PuzzleState(current.getPuzzleState()), current.getSteps())); // need to make deep copy
             if (pathFound)
             {
                 report();
-                return;
+                break;
             }
-            moveBlankRight(current.getPuzzleState().findNumber(blank), new PuzzleState(current.getPuzzleState()));
+//            moveBlankRight(current.getPuzzleState().findNumber(blank), new PuzzleState(current.getPuzzleState()));
+            moveBlankRight(current.getPuzzleState().findNumber(blank), new Node(new PuzzleState(current.getPuzzleState()), current.getSteps())); // need to make deep copy
             if (pathFound)
             {
                 report();
-                return;
+                break;
             }
         }
     }
@@ -83,49 +87,97 @@ public class BreadthFirst {
         return true;
     }
     
-    public void moveBlank(int pos, int newPos, PuzzleState puzzle) // forgot to add to steps in nodes with every move.
+//    public void moveBlank(int pos, int newPos, PuzzleState puzzle) // forgot to add to steps in nodes with every move.
+//    {
+//        puzzle.swap(pos, newPos);
+//        puzzle.printPuzzle();
+//        System.out.println("Total nodes: " + totalNodes + " Queue size: " + queue.size());
+//        addToQueue(new Node(puzzle));
+//    }
+    
+    public void moveBlank(int pos, int newPos, Node node) // forgot to add to steps in nodes with every move.
     {
-        puzzle.swap(pos, newPos);
-        puzzle.printPuzzle();
+        node.getPuzzleState().swap(pos, newPos);
+        node.getPuzzleState().printPuzzle();
         System.out.println("Total nodes: " + totalNodes + " Queue size: " + queue.size());
-        addToQueue(new Node(puzzle));
+        addToQueue(new Node(node.getPuzzleState(), node.getSteps()));
     }
     
-    public boolean moveBlankUp(int pos, PuzzleState puzzle)
+//    public boolean moveBlankUp(int pos, PuzzleState puzzle)
+//    {
+//        if (pos - 3 >= minPos){
+//            moveBlank(pos, pos - 3, puzzle);
+//            return true;
+//        }
+//        return false;
+//    }
+    
+    public boolean moveBlankUp(int pos, Node node)
     {
         if (pos - 3 >= minPos){
-            moveBlank(pos, pos - 3, puzzle);
+            moveBlank(pos, pos - 3, node);
             return true;
         }
         return false;
     }
     
-    public boolean moveBlankDown(int pos, PuzzleState puzzle)
+//    public boolean moveBlankDown(int pos, PuzzleState puzzle)
+//    {
+//        if (pos + 3 <= maxPos){
+//            moveBlank(pos, pos + 3, puzzle);
+//            return true;
+//        }
+//        return false;
+//    }
+    
+    public boolean moveBlankDown(int pos, Node node)
     {
         if (pos + 3 <= maxPos){
-            moveBlank(pos, pos + 3, puzzle);
+            moveBlank(pos, pos + 3, node);
             return true;
         }
         return false;
     }
     
-    public boolean moveBlankLeft(int pos, PuzzleState puzzle)
+//    public boolean moveBlankLeft(int pos, PuzzleState puzzle)
+//    {
+//        int tempPos = pos - 1;
+//        if (tempPos >= minPos && tempPos != 2 && tempPos != 5) // because pos 0, 3 and 6 can't move left
+//        {            
+//            moveBlank(pos, tempPos, puzzle);
+//            return true;
+//        }
+//        return false;
+//    }
+    
+    public boolean moveBlankLeft(int pos, Node node)
     {
         int tempPos = pos - 1;
         if (tempPos >= minPos && tempPos != 2 && tempPos != 5) // because pos 0, 3 and 6 can't move left
         {            
-            moveBlank(pos, tempPos, puzzle);
+            moveBlank(pos, tempPos, node);
             return true;
         }
         return false;
     }
     
-    public boolean moveBlankRight(int pos, PuzzleState puzzle)
+//    public boolean moveBlankRight(int pos, PuzzleState puzzle)
+//    {
+//        int tempPos = pos + 1;
+//        if (tempPos <= maxPos && tempPos != 3 && tempPos != 6) // pos 2, 5 and 8 cant move right
+//        {
+//            moveBlank(pos, tempPos, puzzle);
+//            return true;
+//        }
+//        return false;
+//    }
+    
+    public boolean moveBlankRight(int pos, Node node)
     {
         int tempPos = pos + 1;
         if (tempPos <= maxPos && tempPos != 3 && tempPos != 6) // pos 2, 5 and 8 cant move right
         {
-            moveBlank(pos, tempPos, puzzle);
+            moveBlank(pos, tempPos, node);
             return true;
         }
         return false;
@@ -133,6 +185,7 @@ public class BreadthFirst {
     
     public void addToQueue(Node node)
     {
+        node.addStep(new PuzzleState(node.getPuzzleState()));
         queue.add(node);
         pathFound = checkCurrentWithGoal(node, goalState);
         totalNodes++;
