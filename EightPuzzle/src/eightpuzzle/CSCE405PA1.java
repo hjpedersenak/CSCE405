@@ -63,6 +63,7 @@ public class CSCE405PA1
                 case 'a': 
                     System.out.println("You chose A.");
                     BreadthFirst bf = new BreadthFirst(new Node(startState), new Node(goalState));
+                    bf.breadthFirstSearch(new Node(startState), new Node(goalState));
                     break;
                 case 'b': 
                     System.out.println("You chose B. Not implemented.");
@@ -71,7 +72,9 @@ public class CSCE405PA1
                     System.out.println("You chose C. Not implemented.");
                     break;
                 case 'd':
-                    System.out.println("You chose D. Not implemented.");
+                    System.out.println("You chose D.");
+                    AStarManhattan asManhattan = new AStarManhattan(new Node(startState), new Node(goalState));
+                    asManhattan.aStarManhattanSearch(new Node(startState), new Node(goalState));
                     break;
                 default:
                     System.out.println("Invalid selection.");
@@ -97,21 +100,6 @@ public class CSCE405PA1
         return hVal;
     }    
     
-    //referenced https://stackoverflow.com/questions/8224470/calculating-manhattan-distance
-    public static int calcManhattanH(Node current, PuzzleState goal)
-    {
-        int hVal = 0;
-        int[] currentPos = new int[2];
-        int[] goalPos = new int[2];
-        
-        for(int i = 1; i < 9; i++) //searching for each digit in turn, skipping blank
-        {
-            currentPos = current.searchBoard(i);
-            goalPos = goal.searchBoard(i);
-            hVal = hVal + (Math.abs(currentPos[0]-goalPos[0]) + Math.abs(currentPos[1]-goalPos[1]));
-        }
-        return hVal;
-    }
     
 /*    public void checkParity(PuzzleState start, PuzzleState goal)
     {

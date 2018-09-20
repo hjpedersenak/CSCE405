@@ -74,6 +74,11 @@ public class Node implements Comparable<Node>
         calcF();
     }
     
+    public int readG()
+    {
+        return valG;
+    }
+    
     public void setH(int h)
     {
         valH = h;
@@ -88,6 +93,22 @@ public class Node implements Comparable<Node>
     public int readF()
     {
         return valF;
+    }
+    
+    //referenced https://stackoverflow.com/questions/8224470/calculating-manhattan-distance
+    public int calcManhattanH(Node goal)
+    {
+        int hVal = 0;
+        int[] currentPos = new int[2];
+        int[] goalPos = new int[2];
+        
+        for(int i = 1; i < 9; i++) //searching for each digit in turn, skipping blank
+        {
+            currentPos = this.searchBoard(i);
+            goalPos = goal.searchBoard(i);
+            hVal = hVal + (Math.abs(currentPos[0]-goalPos[0]) + Math.abs(currentPos[1]-goalPos[1]));
+        }
+        return hVal;
     }
 }
 

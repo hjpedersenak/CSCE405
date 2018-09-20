@@ -25,7 +25,7 @@ public class BreadthFirst {
     {
         queue = new ArrayList<Node>();
         this.goalState = goalState;
-        breadthFirstSearch(startState, goalState);
+  //      breadthFirstSearch(startState, goalState);
     }
     
     public void breadthFirstSearch(Node startState, Node goalState)      
