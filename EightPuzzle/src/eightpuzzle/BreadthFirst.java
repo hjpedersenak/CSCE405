@@ -100,7 +100,8 @@ public class BreadthFirst {
         node.getPuzzleState().swap(pos, newPos);
         node.getPuzzleState().printPuzzle();
         System.out.println("Total nodes: " + totalNodes + " Queue size: " + queue.size());
-        addToQueue(new Node(node.getPuzzleState(), node.getSteps()));
+        if (!node.checkPuzzleDuplicates(node.getPuzzleState()))
+            addToQueue(new Node(node.getPuzzleState(), node.getSteps()));
     }
     
 //    public boolean moveBlankUp(int pos, PuzzleState puzzle)

@@ -11,6 +11,7 @@ public class CSCE405PA1
         char again = 'y';
         char searchSelection = 'e';
         char correctPuz = 'n';
+        char samePuz = 'n';
         String stringStart, stringGoal;
         PuzzleState goalState;
         PuzzleState startState;
@@ -36,7 +37,7 @@ public class CSCE405PA1
                 startState.printPuzzle();
                 System.out.println("You entered this GOAL state:");
                 goalState.printPuzzle();
-                System.out.println("Is that correct? Please answer yes or no.");
+                System.out.println("Is that correct? Please answer 'y' or 'n'.");
                 correctPuz = keyboard.nextLine().toLowerCase().charAt(0);
             }
             while(correctPuz == 'n');
@@ -51,6 +52,7 @@ public class CSCE405PA1
             */
             ///////testing complete
             
+            do {
             System.out.println("How do you want to solve the search?\n"
                     + "Please choose an option by its letter:\n"
                     + "A: Breadth-first search\n"
@@ -76,9 +78,10 @@ public class CSCE405PA1
                 default:
                     System.out.println("Invalid selection.");
             }
-            
-            
-            System.out.println("Would you like to solve another 8-Puzzle? Please answer yes or no.");
+            System.out.println("Would you like to solve the same 8-puzzle? Please answer 'y' or 'n'.");
+            samePuz = keyboard.nextLine().toLowerCase().charAt(0);
+            } while (samePuz == 'y');
+            System.out.println("Would you like to solve another 8-Puzzle? Please answer 'y' or 'n'.");
             again = keyboard.nextLine().toLowerCase().charAt(0);
         }
         while(again == 'y');

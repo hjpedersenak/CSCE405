@@ -37,6 +37,16 @@ public class Node implements Comparable<Node>
         }
     }
     
+    public boolean checkPuzzleDuplicates(PuzzleState puzzle)
+    {
+        for(int i = 0; i < steps.size(); i++)
+        {
+            if (steps.get(i).equal(puzzle))
+                return true;
+        }
+        return false;
+    }
+    
     public PuzzleState getPuzzleState()
     {
         return nodeState;
