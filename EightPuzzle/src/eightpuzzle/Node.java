@@ -35,6 +35,7 @@ public class Node implements Comparable<Node>
         {
             steps.get(i).printPuzzle();
         }
+        System.out.println("Total: " + steps.size()+ " steps");
     }
     
     public boolean checkPuzzleDuplicates(PuzzleState puzzle)

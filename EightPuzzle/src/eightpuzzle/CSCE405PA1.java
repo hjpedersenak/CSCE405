@@ -67,7 +67,8 @@ public class CSCE405PA1
                     BreadthFirst bf = new BreadthFirst(new Node(startState), new Node(goalState));
                     break;
                 case 'b': 
-                    System.out.println("You chose B. Not implemented.");
+                    System.out.println("You chose B.");
+                    GreedyBestFirst gbf = new GreedyBestFirst(new Node(startState), new Node(goalState));
                     break;
                 case 'c':
                     System.out.println("You chose C. Not implemented.");
