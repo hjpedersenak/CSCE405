@@ -35,6 +35,17 @@ public class Node implements Comparable<Node>
         {
             steps.get(i).printPuzzle();
         }
+        System.out.println("Total: " + steps.size()+ " steps");
+    }
+    
+    public boolean checkPuzzleDuplicates(PuzzleState puzzle)
+    {
+        for(int i = 0; i < steps.size(); i++)
+        {
+            if (steps.get(i).equal(puzzle))
+                return true;
+        }
+        return false;
     }
     
     public PuzzleState getPuzzleState()
@@ -93,22 +104,6 @@ public class Node implements Comparable<Node>
     public int readF()
     {
         return valF;
-    }
-    
-    //referenced https://stackoverflow.com/questions/8224470/calculating-manhattan-distance
-    public int calcManhattanH(Node goal)
-    {
-        int hVal = 0;
-        int[] currentPos = new int[2];
-        int[] goalPos = new int[2];
-        
-        for(int i = 1; i < 9; i++) //searching for each digit in turn, skipping blank
-        {
-            currentPos = this.searchBoard(i);
-            goalPos = goal.searchBoard(i);
-            hVal = hVal + (Math.abs(currentPos[0]-goalPos[0]) + Math.abs(currentPos[1]-goalPos[1]));
-        }
-        return hVal;
     }
 }
 

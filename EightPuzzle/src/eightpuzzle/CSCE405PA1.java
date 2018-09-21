@@ -11,6 +11,7 @@ public class CSCE405PA1
         char again = 'y';
         char searchSelection = 'e';
         char correctPuz = 'n';
+        char samePuz = 'n';
         String stringStart, stringGoal;
         PuzzleState goalState;
         PuzzleState startState;
@@ -36,7 +37,7 @@ public class CSCE405PA1
                 startState.printPuzzle();
                 System.out.println("You entered this GOAL state:");
                 goalState.printPuzzle();
-                System.out.println("Is that correct? Please answer yes or no.");
+                System.out.println("Is that correct? Please answer 'y' or 'n'.");
                 correctPuz = keyboard.nextLine().toLowerCase().charAt(0);
             }
             while(correctPuz == 'n');
@@ -51,6 +52,7 @@ public class CSCE405PA1
             */
             ///////testing complete
             
+            do {
             System.out.println("How do you want to solve the search?\n"
                     + "Please choose an option by its letter:\n"
                     + "A: Breadth-first search\n"
@@ -63,25 +65,25 @@ public class CSCE405PA1
                 case 'a': 
                     System.out.println("You chose A.");
                     BreadthFirst bf = new BreadthFirst(new Node(startState), new Node(goalState));
-                    bf.breadthFirstSearch(new Node(startState), new Node(goalState));
                     break;
                 case 'b': 
-                    System.out.println("You chose B. Not implemented.");
+                    System.out.println("You chose B.");
+                    GreedyBestFirst gbf = new GreedyBestFirst(new Node(startState), new Node(goalState));
                     break;
                 case 'c':
                     System.out.println("You chose C. Not implemented.");
                     break;
                 case 'd':
-                    System.out.println("You chose D.");
-                    AStarManhattan asManhattan = new AStarManhattan(new Node(startState), new Node(goalState));
-                    asManhattan.aStarManhattanSearch(new Node(startState), new Node(goalState));
+                    System.out.println("You chose D. Not implemented.");
+                    AStarManhattan asMan = new AStarManhattan(new Node(startState), new Node(goalState));
                     break;
                 default:
                     System.out.println("Invalid selection.");
             }
-            
-            
-            System.out.println("Would you like to solve another 8-Puzzle? Please answer yes or no.");
+            System.out.println("Would you like to solve the same 8-puzzle? Please answer 'y' or 'n'.");
+            samePuz = keyboard.nextLine().toLowerCase().charAt(0);
+            } while (samePuz == 'y');
+            System.out.println("Would you like to solve another 8-Puzzle? Please answer 'y' or 'n'.");
             again = keyboard.nextLine().toLowerCase().charAt(0);
         }
         while(again == 'y');
@@ -100,6 +102,21 @@ public class CSCE405PA1
         return hVal;
     }    
     
+    //referenced https://stackoverflow.com/questions/8224470/calculating-manhattan-distance
+    public static int calcManhattanH(Node current, PuzzleState goal)
+    {
+        int hVal = 0;
+        int[] currentPos = new int[2];
+        int[] goalPos = new int[2];
+        
+        for(int i = 1; i < 9; i++) //searching for each digit in turn, skipping blank
+        {
+            currentPos = current.searchBoard(i);
+            goalPos = goal.searchBoard(i);
+            hVal = hVal + (Math.abs(currentPos[0]-goalPos[0]) + Math.abs(currentPos[1]-goalPos[1]));
+        }
+        return hVal;
+    }
     
 /*    public void checkParity(PuzzleState start, PuzzleState goal)
     {

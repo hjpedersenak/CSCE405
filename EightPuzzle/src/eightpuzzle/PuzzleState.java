@@ -126,6 +126,16 @@ public class PuzzleState
         return counter;
     }
     
+    public boolean equal(PuzzleState newPuzzle)
+    {
+        for(int i = 0; i < 9; i++)
+        {
+            if (newPuzzle.getState()[i] != state[i])
+                return false;
+        }
+        return true;
+    }
+    
     public void swap(int positionBlank, int positionNew)
     {
         int temp;
