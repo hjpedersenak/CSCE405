@@ -119,7 +119,7 @@ public class GreedyBestFirst {
     public void moveBlank(int pos, int newPos, Node node) // forgot to add to steps in nodes with every move.
     {
         node.getPuzzleState().swap(pos, newPos);
-        node.getPuzzleState().printPuzzle();
+//        node.getPuzzleState().printPuzzle();
         System.out.println("Total nodes: " + totalNodes + " Queue size: " + pq.size());
         if (!node.checkPuzzleDuplicates(node.getPuzzleState()))
             addToQueue(new Node(node.getPuzzleState(), node.getSteps()));

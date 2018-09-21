@@ -25,7 +25,7 @@ public class AStarMisplaced {
         for (Node node:pq)
         {
             System.out.println("F value: " + node.readF());
-            node.getPuzzleState().printPuzzle();
+//            node.getPuzzleState().printPuzzle();
         }
     }
     
