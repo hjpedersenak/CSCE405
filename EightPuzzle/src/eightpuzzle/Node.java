@@ -85,11 +85,6 @@ public class Node implements Comparable<Node>
         calcF();
     }
     
-    public int readG()
-    {
-        return valG;
-    }
-    
     public void setH(int h)
     {
         valH = h;
