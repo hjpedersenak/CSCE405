@@ -1,9 +1,8 @@
-
 package eightpuzzle;
 
 import java.util.*;
 
-public class AStarManhattan {
+public class AStarMisplaced {
     
     private Node start, goal;
     private PriorityQueue<Node> pq;
@@ -13,12 +12,12 @@ public class AStarManhattan {
     private int minPos = 0;
     private int blank = 0;
     
-    public AStarManhattan(Node start, Node goal)
+    public AStarMisplaced(Node start, Node goal)
     {
         this.start = start;
         this.goal = goal;
         pq = new PriorityQueue<Node>(); 
-        aStarManhattanSearch();
+        aStarMisplacedSearch();
     }
     
     public void printPQ()
@@ -30,7 +29,7 @@ public class AStarManhattan {
         }
     }
     
-    public void aStarManhattanSearch()
+    public void aStarMisplacedSearch()
     {
         Node current = new Node(start.getPuzzleState());
         addToQueue(current, -1);
@@ -44,7 +43,7 @@ public class AStarManhattan {
             for(int i =0; i < 4; i++)
             {
                 Node temp = new Node(new PuzzleState(current.getPuzzleState()), current.getSteps());
-                temp.setH(calcManhattanH(temp, goal.getPuzzleState()));
+                temp.setH(calcMisplacedH(temp, goal.getPuzzleState()));
                 int lastG = current.readG();
                 switch(i){
                     case 0:
@@ -77,20 +76,16 @@ public class AStarManhattan {
         }
     }
         
-    public int calcManhattanH(Node current, PuzzleState goal)
+    public static int calcMisplacedH(Node current, PuzzleState goal)
     {
         int hVal = 0;
-        int[] currentPos = new int[2];
-        int[] goalPos = new int[2];
-        
-        for(int i = 0; i < 9; i++) //searching for each digit in turn, skipping blank
+        for(int i = 0; i < 9; i++)
         {
-            currentPos = current.searchBoard(i);
-            goalPos = goal.searchBoard(i);
-            hVal = hVal + (Math.abs(currentPos[0]-goalPos[0]) + Math.abs(currentPos[1]-goalPos[1]));
+            if(current.readPosValue(i) != goal.readPosValue(i))
+                hVal++;
         }
         return hVal;
-    }
+    }    
     
     public boolean checkCurrentWithGoal(Node currentState, Node goalState)
     {
@@ -156,7 +151,7 @@ public class AStarManhattan {
     public void addToQueue(Node node, int lastG)
     {
         node.addStep(new PuzzleState(node.getPuzzleState()));
-        node.setH(calcManhattanH(node, goal.getPuzzleState()));
+        node.setH(calcMisplacedH(node, goal.getPuzzleState()));
         node.setG(lastG + 1);
         pq.add(node);
         pathFound = checkCurrentWithGoal(node, goal);

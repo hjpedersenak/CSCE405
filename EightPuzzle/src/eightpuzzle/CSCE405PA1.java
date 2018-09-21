@@ -63,18 +63,19 @@ public class CSCE405PA1
             switch(searchSelection)
             {
                 case 'a': 
-                    System.out.println("You chose A.");
+                    System.out.println("You chose Breadth-first search");
                     BreadthFirst bf = new BreadthFirst(new Node(startState), new Node(goalState));
                     break;
                 case 'b': 
-                    System.out.println("You chose B.");
+                    System.out.println("You chose Greedy Best First searc");
                     GreedyBestFirst gbf = new GreedyBestFirst(new Node(startState), new Node(goalState));
                     break;
                 case 'c':
-                    System.out.println("You chose C. Not implemented.");
+                    System.out.println("You chose A* w/ Misplaced search");
+                    AStarMisplaced asMis = new AStarMisplaced(new Node(startState), new Node(goalState));
                     break;
                 case 'd':
-                    System.out.println("You chose D. Not implemented.");
+                    System.out.println("You chose A* w/ Manhattan search");
                     AStarManhattan asMan = new AStarManhattan(new Node(startState), new Node(goalState));
                     break;
                 default:
