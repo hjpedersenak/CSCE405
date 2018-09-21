@@ -1,4 +1,3 @@
-
 package eightpuzzle;
 
 import java.util.*;
@@ -128,4 +127,3 @@ public class CSCE405PA1
     
     
 }
-
