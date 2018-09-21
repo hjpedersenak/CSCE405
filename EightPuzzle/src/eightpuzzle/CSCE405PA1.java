@@ -51,40 +51,44 @@ public class CSCE405PA1
                     + calcManhattanH(startNode, goalState));
             */
             ///////testing complete
-            
-            do {
-            System.out.println("How do you want to solve the search?\n"
-                    + "Please choose an option by its letter:\n"
-                    + "A: Breadth-first search\n"
-                    + "B: Greedy best-first search\n"
-                    + "C: A* search with Misplaced-Tiles heuristic\n"
-                    + "D: A* search with Manhattan-Distance heuristic");
-            searchSelection = keyboard.nextLine().toLowerCase().charAt(0);
-            switch(searchSelection)
+            if(validParity(goalState, startState))
             {
-                case 'a': 
-                    System.out.println("You chose Breadth-first search");
-                    BreadthFirst bf = new BreadthFirst(new Node(startState), new Node(goalState));
-                    break;
-                case 'b': 
-                    System.out.println("You chose Greedy Best First searc");
-                    GreedyBestFirst gbf = new GreedyBestFirst(new Node(startState), new Node(goalState));
-                    break;
-                case 'c':
-                    System.out.println("You chose A* w/ Misplaced search");
-                    AStarMisplaced asMis = new AStarMisplaced(new Node(startState), new Node(goalState));
-                    break;
-                case 'd':
-                    System.out.println("You chose A* w/ Manhattan search");
-                    AStarManhattan asMan = new AStarManhattan(new Node(startState), new Node(goalState));
-                    break;
-                default:
-                    System.out.println("Invalid selection.");
+                do {
+                System.out.println("How do you want to solve the search?\n"
+                        + "Please choose an option by its letter:\n"
+                        + "A: Breadth-first search\n"
+                        + "B: Greedy best-first search\n"
+                        + "C: A* search with Misplaced-Tiles heuristic\n"
+                        + "D: A* search with Manhattan-Distance heuristic");
+                searchSelection = keyboard.nextLine().toLowerCase().charAt(0);
+                switch(searchSelection)
+                {
+                    case 'a': 
+                        System.out.println("You chose Breadth-first search");
+                        BreadthFirst bf = new BreadthFirst(new Node(startState), new Node(goalState));
+                        break;
+                    case 'b': 
+                        System.out.println("You chose Greedy Best First searc");
+                        GreedyBestFirst gbf = new GreedyBestFirst(new Node(startState), new Node(goalState));
+                        break;
+                    case 'c':
+                        System.out.println("You chose A* w/ Misplaced search");
+                        AStarMisplaced asMis = new AStarMisplaced(new Node(startState), new Node(goalState));
+                        break;
+                    case 'd':
+                        System.out.println("You chose A* w/ Manhattan search");
+                        AStarManhattan asMan = new AStarManhattan(new Node(startState), new Node(goalState));
+                        break;
+                    default:
+                        System.out.println("Invalid selection.");
+                }
+                System.out.println("Would you like to solve the SAME 8-puzzle? Please answer 'y' or 'n'.");
+                samePuz = keyboard.nextLine().toLowerCase().charAt(0);
+                } while (samePuz == 'y');
             }
-            System.out.println("Would you like to solve the same 8-puzzle? Please answer 'y' or 'n'.");
-            samePuz = keyboard.nextLine().toLowerCase().charAt(0);
-            } while (samePuz == 'y');
-            System.out.println("Would you like to solve another 8-Puzzle? Please answer 'y' or 'n'.");
+            else
+                System.out.println("The puzzles do not have the same parity. Unsolveable.");
+            System.out.println("Would you like to solve a NEW 8-Puzzle? Please answer 'y' or 'n'.");
             again = keyboard.nextLine().toLowerCase().charAt(0);
         }
         while(again == 'y');
@@ -119,10 +123,10 @@ public class CSCE405PA1
         return hVal;
     }
     
-/*    public void checkParity(PuzzleState start, PuzzleState goal)
+    public static boolean validParity(PuzzleState start, PuzzleState goal)
     {
-        
-    }*/
+        return ((start.getParity() % 2) == (goal.getParity() % 2));
+    }
     
     
     
