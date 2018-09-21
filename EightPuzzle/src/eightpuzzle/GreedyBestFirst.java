@@ -18,6 +18,7 @@ public class GreedyBestFirst {
     private int maxPos = 8;
     private int minPos = 0;
     private int blank = 0;
+    private int totalNodesExpanded = 0;
     
     public GreedyBestFirst(Node start, Node goal)
     {
@@ -31,8 +32,8 @@ public class GreedyBestFirst {
     {
         for (Node node:pq)
         {
-            System.out.println("H value: " + node.readF());
-            node.getPuzzleState().printPuzzle();
+//            System.out.println("H value: " + node.readF());
+//            node.getPuzzleState().printPuzzle();
         }
     }
     
@@ -52,7 +53,8 @@ public class GreedyBestFirst {
         {
             Node lastNode = current;
             current = pq.remove();
-            System.out.println("\nF(n) = " + current.readF());
+            totalNodesExpanded++;
+//            System.out.println("\nF(n) = " + current.readF());
             int blankPos = current.getPuzzleState().findNumber(blank);
             for(int i =0; i < 4; i++)
             {
@@ -84,6 +86,7 @@ public class GreedyBestFirst {
                 System.out.println("FOUND PATH");
                 lastNode.printSteps();
                 System.out.println("Total nodes created: " + totalNodes);
+                System.out.println("Total nodes expanded: " + totalNodesExpanded);
                 break;
             }
         }
@@ -120,9 +123,10 @@ public class GreedyBestFirst {
     {
         node.getPuzzleState().swap(pos, newPos);
 //        node.getPuzzleState().printPuzzle();
-        System.out.println("Total nodes: " + totalNodes + " Queue size: " + pq.size());
-        if (!node.checkPuzzleDuplicates(node.getPuzzleState()))
+        if (!node.checkPuzzleDuplicates(node.getPuzzleState())){
             addToQueue(new Node(node.getPuzzleState(), node.getSteps()));
+            System.out.println("Total nodes: " + totalNodes + " Queue size: " + pq.size());
+        }
     }
     
     public boolean moveBlankUp(int pos, Node node)

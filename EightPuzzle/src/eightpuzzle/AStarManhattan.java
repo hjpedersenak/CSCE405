@@ -12,6 +12,7 @@ public class AStarManhattan {
     private int maxPos = 8;
     private int minPos = 0;
     private int blank = 0;
+    private int totalNodesExpanded = 0;
     
     public AStarManhattan(Node start, Node goal)
     {
@@ -25,7 +26,7 @@ public class AStarManhattan {
     {
         for (Node node:pq)
         {
-            System.out.println("F value: " + node.readF());
+//            System.out.println("F value: " + node.readF());
 //            node.getPuzzleState().printPuzzle();
         }
     }
@@ -39,7 +40,8 @@ public class AStarManhattan {
         {
             Node lastNode = current;
             current = pq.remove();
-            System.out.println("\nF(n) = " + current.readF());
+            totalNodesExpanded++;
+//            System.out.println("\nF(n) = " + current.readF());
             int blankPos = current.getPuzzleState().findNumber(blank);
             for(int i =0; i < 4; i++)
             {
@@ -72,6 +74,7 @@ public class AStarManhattan {
                 System.out.println("FOUND PATH");
                 lastNode.printSteps();
                 System.out.println("Total nodes created: " + totalNodes);
+                System.out.println("Total nodes expanded: " + totalNodesExpanded);
                 break;
             }
         }
@@ -107,10 +110,11 @@ public class AStarManhattan {
     public void moveBlank(int pos, int newPos, Node node, int lastG) // forgot to add to steps in nodes with every move.
     {
         node.getPuzzleState().swap(pos, newPos);
-        node.getPuzzleState().printPuzzle();
-        System.out.println("Total nodes: " + totalNodes + " Queue size: " + pq.size());
-        if (!node.checkPuzzleDuplicates(node.getPuzzleState()))
+//        node.getPuzzleState().printPuzzle();
+        if (!node.checkPuzzleDuplicates(node.getPuzzleState())){
             addToQueue(new Node(node.getPuzzleState(), node.getSteps()), lastG);
+            System.out.println("Total nodes: " + totalNodes + " Queue size: " + pq.size());
+        }
     }
     
     public boolean moveBlankUp(int pos, Node node, int lastG)

@@ -21,6 +21,7 @@ public class BreadthFirst {
     private int totalNodes = 0;
     private Node goalState;
     private boolean pathFound = false;
+    private int totalNodesExpanded = 0;
     public BreadthFirst(Node startState, Node goalState)
     {
         queue = new ArrayList<Node>();
@@ -37,6 +38,7 @@ public class BreadthFirst {
         {
             current = queue.get(0);
             queue.remove(0); // first out
+            totalNodesExpanded++;
             moveBlankUp(current.getPuzzleState().findNumber(blank), new Node(new PuzzleState(current.getPuzzleState()), current.getSteps())); // need to make deep copy
             if (pathFound)
             {
@@ -68,7 +70,9 @@ public class BreadthFirst {
     {
         System.out.println("Path found! Steps: ");
         queue.get(queue.size()-1).printSteps();
-        System.out.println("Total node created: " + totalNodes);
+        System.out.println("Total nodes created: " + totalNodes);
+        System.out.println("Total nodes expanded: " + totalNodesExpanded);
+        
     }
     
     public boolean checkCurrentWithGoal(Node currentState, Node goalState)
@@ -87,9 +91,10 @@ public class BreadthFirst {
     {
         node.getPuzzleState().swap(pos, newPos);
 //        node.getPuzzleState().printPuzzle();
-        System.out.println("Total nodes: " + totalNodes + " Queue size: " + queue.size());
-        if (!node.checkPuzzleDuplicates(node.getPuzzleState()))
+        if (!node.checkPuzzleDuplicates(node.getPuzzleState())){
             addToQueue(new Node(node.getPuzzleState(), node.getSteps()));
+            System.out.println("Total nodes: " + totalNodes + " Queue size: " + queue.size());
+        }
     }
     
     public boolean moveBlankUp(int pos, Node node)
