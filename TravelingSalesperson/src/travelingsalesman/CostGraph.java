@@ -65,7 +65,10 @@ public class CostGraph {
         System.out.print("   ");
         for(int i =0; i < arrSize; i++)
         {
-            System.out.print("  " +i + "   ");
+            if(i < 10)
+                System.out.print("  " +i + "   ");
+            else
+                System.out.print("  " +i + "  ");
         }
         System.out.println();
         for(int i = 0; i < arrSize; i++)
