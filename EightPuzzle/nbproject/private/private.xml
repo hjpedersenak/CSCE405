@@ -4,6 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Nicolas%20Wibisono/Documents/University%20of%20Alaska/Fall%202018/AI/CSCE405/EightPuzzle/src/eightpuzzle/BreadthFirst.java</file>
+            <file>file:/C:/Users/Nicolas%20Wibisono/Documents/University%20of%20Alaska/Fall%202018/AI/CSCE405/EightPuzzle/src/eightpuzzle/AStarMisplaced.java</file>
+            <file>file:/C:/Users/Nicolas%20Wibisono/Documents/University%20of%20Alaska/Fall%202018/AI/CSCE405/EightPuzzle/src/eightpuzzle/GreedyBestFirst.java</file>
+            <file>file:/C:/Users/Nicolas%20Wibisono/Documents/University%20of%20Alaska/Fall%202018/AI/CSCE405/EightPuzzle/src/eightpuzzle/AStarManhattan.java</file>
             <file>file:/C:/Users/Nicolas%20Wibisono/Documents/University%20of%20Alaska/Fall%202018/AI/CSCE405/EightPuzzle/src/eightpuzzle/Node.java</file>
             <file>file:/C:/Users/Nicolas%20Wibisono/Documents/University%20of%20Alaska/Fall%202018/AI/CSCE405/EightPuzzle/src/eightpuzzle/PuzzleState.java</file>
             <file>file:/C:/Users/Nicolas%20Wibisono/Documents/University%20of%20Alaska/Fall%202018/AI/CSCE405/EightPuzzle/src/eightpuzzle/CSCE405PA1.java</file>
