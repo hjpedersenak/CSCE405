@@ -90,4 +90,9 @@ public class CostGraph {
         return rand.nextInt(10);
     }
     
+    public int getCost(int city1, int city2)
+    {
+        return cities[city2][city1];
+    }
+    
 }
