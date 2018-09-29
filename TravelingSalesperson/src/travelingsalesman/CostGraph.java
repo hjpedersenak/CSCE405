@@ -90,9 +90,9 @@ public class CostGraph {
         return rand.nextInt(10);
     }
     
-    public int getCost(int city1, int city2)
+    public int getCost(int from, int to) 
     {
-        return cities[city2][city1];
+        return cities[to][from];
     }
     
 }
