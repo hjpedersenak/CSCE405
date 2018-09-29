@@ -96,8 +96,6 @@ public class CostGraph {
 
         ArrayList startTour = new ArrayList<Integer>();
 
-        int arrSize = costgraph.getArrSize();
-
         int startCity = costgraph.getRandomStart();
         startTour.add(startCity);
 
