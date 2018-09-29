@@ -90,7 +90,7 @@ public class CostGraph {
     public int getRandomStart()
     {
         Random rand = new Random();
-        return rand.nextInt(10);
+        return rand.nextInt(arrSize);
     }
     
     public int getCost(int from, int to) 
