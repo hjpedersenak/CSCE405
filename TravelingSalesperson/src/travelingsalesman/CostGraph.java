@@ -50,7 +50,10 @@ public class CostGraph {
         {
             for(int j = 0; j < arrSize; j++)
             {
-                cities[j][i] = rand.nextInt(2401) + 100;
+                if(i == j)
+                    cities[i][j] = 0;
+                else
+                    cities[j][i] = rand.nextInt(2401) + 100;
             }
         }
         
@@ -59,7 +62,7 @@ public class CostGraph {
     
     public void printGraph()
     {
-        System.out.print("     ");
+        System.out.print("       ");
         for(int i =0; i < arrSize; i++)
         {
             System.out.print(i + "     ");
@@ -70,13 +73,21 @@ public class CostGraph {
             System.out.print(i + "    ");
             for(int j = 0; j < arrSize; j++)
             {
-                if (cities[j][i] < 1000)
-                     System.out.print( cities[j][i] + "   ");
+                if(cities[j][i] == 0)
+                    System.out.print( "   " + cities[j][i] + "  ");
+                else if (cities[j][i] < 1000)
+                     System.out.print(" "+ cities[j][i] + "  ");
                 else
                     System.out.print( cities[j][i] + "  ");
             }
             System.out.println();
         }
+    }
+    
+    public int getRandomStart()
+    {
+        Random rand = new Random();
+        return rand.nextInt(10);
     }
     
 }
