@@ -2,6 +2,7 @@
 package travelingsalesman;
 
 
-public class Annealing {
+public class Annealing 
+{
     
 }

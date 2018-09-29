@@ -2,6 +2,7 @@
 package travelingsalesman;
 
 
-public class HillClimbing {
+public class HillClimbing 
+{
     
 }
