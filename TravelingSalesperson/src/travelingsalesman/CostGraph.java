@@ -62,7 +62,7 @@ public class CostGraph {
     
     public void printGraph()
     {
-        System.out.print("       ");
+        System.out.print("   ");
         for(int i =0; i < arrSize; i++)
         {
             System.out.print("  " +i + "   ");
