@@ -73,8 +73,6 @@ public class CostGraph {
             System.out.print("  "+i + "  ");
             for(int j = 0; j < arrSize; j++)
             {
-                if (cities[j][i] < 1000)
-                     System.out.print( " " + cities[j][i] + "  ");
                 if(cities[j][i] == 0)
                     System.out.print( "   " + cities[j][i] + "  ");
                 else if (cities[j][i] < 1000)
