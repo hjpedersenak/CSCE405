@@ -2,6 +2,7 @@
 package travelingsalesman;
 
 
-public class CostGraph {
+public class CostGraph 
+{
     
 }
