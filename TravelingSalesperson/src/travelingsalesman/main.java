@@ -9,7 +9,6 @@ public class main
     public static void main(String[] args) 
     {
 
-        CostGraph cg = new CostGraph(10);
         Scanner keyboard = new Scanner(System.in);
         int numCities = -1;
         char repeat = 'y';
@@ -24,7 +23,7 @@ public class main
                 System.out.println("Invalid number of cities. Must be greater than 2.");
             else
             {
-                //magic happens here
+                CostGraph cg = new CostGraph(numCities);
             }
             System.out.println("Do you need to make another trip? Please answer yes or no.");
             repeat = keyboard.nextLine().toLowerCase().charAt(0);      
