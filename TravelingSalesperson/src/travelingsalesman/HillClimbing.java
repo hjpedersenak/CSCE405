@@ -15,7 +15,7 @@ public class HillClimbing
     public HillClimbing(CostGraph cg)
     {
         hcGraph = cg;
-        numCities = cg.getArrSize(); //make Tour class later
+        numCities = cg.getArrSize(); //make into Tour class later
         cities = new ArrayList(numCities);
     }
     
@@ -32,7 +32,7 @@ public class HillClimbing
                     ArrayList<Integer> testCase = cities;
                     int temp = testCase.get(i);
                     testCase.set(i, testCase.get(j));
-                    testCase.set(j, i);
+                    testCase.set(j, temp);
                     int testCost = calcCost(testCase);
                     if(bestCost == 0 || bestCost > testCost)
                     {
@@ -51,11 +51,10 @@ public class HillClimbing
         int cost = 0;
         for(int i = 0; i < numCities - 1; i++)
         {
-            cost = cost + hcGraph.getCost(i, i + 1);
+            cost = cost + hcGraph.getCost(i, i + 1); //i should be y/From, i+1 should be x/To
         }
         cost = cost + hcGraph.getCost(numCities - 1, 0);
         return cost;
     }
-    
 }
 
