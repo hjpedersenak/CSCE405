@@ -5,8 +5,6 @@ import java.util.*;
 
 public class main 
 {
-    
-    System.out.println("Merge test!");
 
     public static void main(String[] args) 
     {
