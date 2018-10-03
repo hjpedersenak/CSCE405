@@ -114,6 +114,15 @@ public class CostGraph {
         Collections.shuffle(startTour.subList(startIndex, endIndex));
         startTour.add(destinationCity);
         System.out.println("Random city tour:\n" + startTour);
+        
+        //        int cost = 0;
+//        
+//        for (int cityIndex = 0; cityIndex < costgraph.getArrSize()-1; cityIndex++) {
+//            cost += getCost(startTour.indexOf(cityIndex), startTour.indexOf(cityIndex + 1));
+//            System.out.println("Cost: " + cost + " from city " + cityIndex + " to city " + (cityIndex+1));
+//        }
+////        cost += getCost(startTour.indexOf(startTour.size()-2), startTour.indexOf(startTour.size()-1));
+//        System.out.println("Start tour cost: " + cost);
 
         return startTour;
     }
