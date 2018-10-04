@@ -23,6 +23,11 @@ public class main
             else
             {
                 CostGraph cg = new CostGraph(numCities);
+                ArrayList<Integer> tour = cg.makeTour(cg);
+                Annealing an = new Annealing(cg);
+                an.simulatedAnnealing(tour);
+                System.out.println("Your start cost was: " + an.calcCost(tour));
+                System.out.println("Your start tour was: " + tour);
                 cg.makeTour(cg);
             }
             System.out.println("Do you need to make another trip? Please answer yes or no.");
