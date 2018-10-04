@@ -23,6 +23,7 @@ public class main
             else
             {
                 CostGraph cg = new CostGraph(numCities);
+                cg.makeTour(cg);
             }
             System.out.println("Do you need to make another trip? Please answer yes or no.");
             repeat = keyboard.nextLine().toLowerCase().charAt(0);      
