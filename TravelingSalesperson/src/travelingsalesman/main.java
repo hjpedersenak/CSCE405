@@ -33,6 +33,7 @@ public class main
             else
             {
                 CostGraph cg = new CostGraph(numCities);
+<<<<<<< HEAD
                 HillClimbing hc = new HillClimbing(cg);
                 for(int i = 1; i <= maxRuns; i++ )
                 {
@@ -40,6 +41,14 @@ public class main
                     results[i][1] = Integer.toString(hc.runTest(tour));
                 }
                 print(results);
+=======
+                ArrayList<Integer> tour = cg.makeTour(cg);
+                Annealing an = new Annealing(cg);
+                an.simulatedAnnealing(tour);
+                System.out.println("Your start cost was: " + an.calcCost(tour));
+                System.out.println("Your start tour was: " + tour);
+                cg.makeTour(cg);
+>>>>>>> HannaBranch
             }
             System.out.println("Do you need to make another trip? Please answer yes or no.");
             repeat = keyboard.nextLine().toLowerCase().charAt(0);      
