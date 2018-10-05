@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class Annealing {
 
+    // resource: http://www.theprojectspot.com/tutorial-post/simulated-annealing-algorithm-for-beginners/6
     private double temp = 10000;
     private double coolingRate = 0.003;
     private final CostGraph snGraph;
@@ -34,64 +35,53 @@ public class Annealing {
     }
 
     public int simulatedAnnealing(ArrayList<Integer> currentSolution) {
-        
-        System.out.println("\n\n\n\n\n\n\n");
-    
-        System.out.println("\nStart Cost: " + calcCost(currentSolution));
-        System.out.println("\nStart tour: " + currentSolution);
-        
+
+        temp = 10000;
+
+        System.out.println("\n\n-------------SIMULATED ANNEALING-------------");
+        System.out.println("\nSTART COST: " + calcCost(currentSolution));
+        System.out.println("START TOUR: " + currentSolution);
+//        System.out.println("\n\nShowing results for temp < 1.1:\n");
+
         ArrayList<Integer> best = new ArrayList<Integer>(currentSolution);
-//        int startIndex = 1;
-//        int endIndex = snGraph.getArrSize() - 1;
-//        Collections.shuffle(best.subList(1, snGraph.getArrSize() - 1));
-       
+
         while (temp > 1) {
-            
+
             Random rand = new Random();
- 
+
             ArrayList<Integer> newSolution = new ArrayList<Integer>(currentSolution);
-            
-//            Collections.shuffle(newSolution.subList(1, snGraph.getArrSize() - 1));
-            if (temp < 1.5)
-                System.out.println("New solution: " + newSolution);
 
             int tourPos1 = rand.nextInt(newSolution.size() - 2) + 1;
-            int tourPos2 = rand.nextInt(newSolution.size() -2) + 1;
-           
-//            for (int i = 1; i < newSolution.size(); i++) {
-//                for (int j = 1; j < newSolution.size(); j++) {
+            int tourPos2 = rand.nextInt(newSolution.size() - 2) + 1;
 
-                            int tem = newSolution.get(tourPos1);
-                            newSolution.set(tourPos1, newSolution.get(tourPos2));
-                            newSolution.set(tourPos2, tem);
-//                }
-//            }
-            
-            if (temp < 1.5)                
-                System.out.println("New solution after swap: " + newSolution);
+            int tem = newSolution.get(tourPos1);
+            newSolution.set(tourPos1, newSolution.get(tourPos2));
+            newSolution.set(tourPos2, tem);
 
+//            if (temp < 1.1)                
+//                System.out.println("New solution after swap: " + newSolution);
             int currentEnergy = calcCost(currentSolution);
             int neighborEnergy = calcCost(newSolution);
-            
+
             // accept neighbor? 
             if (acceptanceProbability(currentEnergy, neighborEnergy, temp) > Math.random()) {
                 currentSolution = newSolution;
             }
-            
+
             // keep track of best solution
             if (calcCost(currentSolution) < calcCost(best)) {
                 best = new ArrayList<Integer>(currentSolution);
             }
-            
-            if (temp < 1.5) 
-                System.out.println("Temperature: " + temp);
 
-            temp *= 1-coolingRate;
+//            if (temp < 1.1) 
+//                System.out.println("Temperature: " + temp);
+            temp *= 1 - coolingRate;
         }
-      
-        System.out.println("FINAL COST: " + calcCost(best) + "\n");
-//        System.out.println("Final Tour: " + best +"\n");
-        
+
+        System.out.println("FINAL COST: " + calcCost(best));
+        System.out.println("FINAL TOUR: " + best + "\n");
+        System.out.println("-------------END SIMULATED ANNEALING-------------\n\n");
+
         return calcCost(best);
     }
 
