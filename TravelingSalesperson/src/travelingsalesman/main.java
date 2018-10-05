@@ -40,9 +40,6 @@ public class main
                     ArrayList<Integer> tour = new ArrayList<>(cg.makeTour(cg));
                     results[i][1] = Integer.toString(hc.runTest(tour));
                     results[i][2] = Integer.toString(sn.simulatedAnnealing(tour));
-//                    for (int j = 1; j <= maxRuns; j++) {
-//                        results[j][2] = Integer.toString(sn.simulatedAnnealing(tour));
-//                      }
                 }
                 print(results);
             }
