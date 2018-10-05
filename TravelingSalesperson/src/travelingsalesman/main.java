@@ -34,7 +34,6 @@ public class main
             {
                 CostGraph cg = new CostGraph(numCities);
                 HillClimbing hc = new HillClimbing(cg);
-                HillClimbing hc = new HillClimbing(cg);
                 Annealing sn = new Annealing(cg);
                 for(int i = 1; i <= maxRuns; i++ )
                 {
