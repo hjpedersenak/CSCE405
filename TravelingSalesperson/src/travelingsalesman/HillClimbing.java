@@ -65,6 +65,7 @@ public class HillClimbing
     {
         if(bestSwap[0] != bestSwap[1])
         {
+            System.out.println("-------------HILL CLIMBING-------------\n\n");
             System.out.println("Swapping " + tour.get(bestSwap[0]) + " and " + tour.get(bestSwap[1]));
             int oldCost = calcCost(tour);
             System.out.println("Old cost: " + oldCost);
