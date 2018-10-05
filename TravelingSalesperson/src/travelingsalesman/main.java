@@ -32,6 +32,7 @@ public class main
                 System.out.println("Invalid number of cities. Must be greater than 2.");
             else
             {
+                CostGraph cg = new CostGraph(numCities);
                 HillClimbing hc = new HillClimbing(cg);
                 HillClimbing hc = new HillClimbing(cg);
                 Annealing sn = new Annealing(cg);
