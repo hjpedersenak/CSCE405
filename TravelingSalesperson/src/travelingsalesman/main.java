@@ -34,11 +34,17 @@ public class main
             {
                 CostGraph cg = new CostGraph(numCities);
 <<<<<<< HEAD
+<<<<<<< HEAD
                 HillClimbing hc = new HillClimbing(cg);
+=======
+                HillClimbing hc = new HillClimbing(cg);
+                Annealing sn = new Annealing(cg);
+>>>>>>> HannaBranch
                 for(int i = 1; i <= maxRuns; i++ )
                 {
                     ArrayList<Integer> tour = new ArrayList<>(cg.makeTour(cg));
                     results[i][1] = Integer.toString(hc.runTest(tour));
+<<<<<<< HEAD
                 }
                 print(results);
 =======
@@ -48,6 +54,11 @@ public class main
                 System.out.println("Your start cost was: " + an.calcCost(tour));
                 System.out.println("Your start tour was: " + tour);
                 cg.makeTour(cg);
+>>>>>>> HannaBranch
+=======
+                    results[i][2] = Integer.toString(sn.simulatedAnnealing(tour));
+                }
+                print(results);
 >>>>>>> HannaBranch
             }
             System.out.println("Do you need to make another trip? Please answer yes or no.");
