@@ -17,20 +17,18 @@ public class Game {
         owari.printBoard();
 
         while (!owari.endGame()) {
-            for (int i = 0; i < 3; i++) {
-                System.out.print("Player " + owari.getCurrentPlayer() + ", enter your selected pitNumber (0-5): ");
-                int pitNumber = keyboard.nextInt();
+            System.out.print("Player " + owari.getCurrentPlayer() + ", enter your selected pitNumber (0-5): ");
+            int pitNumber = keyboard.nextInt();
+            keyboard.nextLine();
+            while (pitNumber > 5 || pitNumber < 0 || owari.getBoard(owari.getCurrentPlayer(), pitNumber) == 0) { // check for out of bound and empty pits
+                System.out.println("INVALID MOVE, enter your selected pitNumber (0-5)");
+                pitNumber = keyboard.nextInt();
                 keyboard.nextLine();
-                while (pitNumber > 5 || pitNumber < 0 || owari.getBoard(owari.getCurrentPlayer(), pitNumber) == 0) { // check for out of bound and empty pits
-                    System.out.println("INVALID MOVE, enter your selected pitNumber (0-5)");
-                    pitNumber = keyboard.nextInt();
-                    keyboard.nextLine();
-                }
-
-                owari.moveStones(owari.getCurrentPlayer(), pitNumber);
-                owari.switchTurn();
-                owari.printBoard();
             }
+
+            owari.moveStones(owari.getCurrentPlayer(), pitNumber);
+            owari.switchTurn();
+            owari.printBoard();
         }
     }
 
