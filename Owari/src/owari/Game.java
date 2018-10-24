@@ -8,24 +8,19 @@ public class Game {
         Scanner keyboard = new Scanner(System.in);
         String mode;
         int whoMoveFirst;
+        
         System.out.println("Welcome to Owari!");
         // play against AI minimax
-        System.out.println("Enter 1 if you want to play first, 2 if you want to play second"); //
+        System.out.println("Enter 1 if you want to play first, 2 if you want to play second"); // 1 is north, 2 south // i think i have a logic error here.
         whoMoveFirst = keyboard.nextInt();
         keyboard.nextLine();
         Owari owari = new Owari(whoMoveFirst);
+        HumanPlayer human = new HumanPlayer(whoMoveFirst);
         owari.printBoard();
 
         while (!owari.endGame()) {
-            System.out.print("Player " + owari.getCurrentPlayer() + ", enter your selected pitNumber (0-5): ");
-            int pitNumber = keyboard.nextInt();
-            keyboard.nextLine();
-            while (pitNumber > 5 || pitNumber < 0 || owari.getBoard(owari.getCurrentPlayer(), pitNumber) == 0) { // check for out of bound and empty pits
-                System.out.println("INVALID MOVE, enter your selected pitNumber (0-5)");
-                pitNumber = keyboard.nextInt();
-                keyboard.nextLine();
-            }
-
+            System.out.print("Player " + (owari.getCurrentPlayer()+1) + ", enter your selected pitNumber (0-5): ");
+            int pitNumber = human.humanTurn(owari);
             owari.moveStones(owari.getCurrentPlayer(), pitNumber);
             owari.switchTurn();
             owari.printBoard();
