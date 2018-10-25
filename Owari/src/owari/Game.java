@@ -59,9 +59,9 @@ public class Game {
     {
         if(currentPlayer == human)
         {
-            return "Human";
+            return "North";
         }
-        return "AI";
+        return "South";
     }
     
 
