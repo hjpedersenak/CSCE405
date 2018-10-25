@@ -173,13 +173,28 @@ public class Owari {
         int total2 = 0;
         for(int i = 0; i < goalPit; i++)
         {
-            total1 += getBoard(0, i);
-            total2 += getBoard(1, i);
+            total1 += getBoard(NORTH, i);
+            total2 += getBoard(SOUTH, i);
         }
 
-        if(total1 == 0 || total2 == 0)
+        if(total1 == 0)
+        {
+            for(int i = 0; i < goalPit; i++) // if one side is empty then put the rest of the stone to the other side's goalpit
+            {
+                board[SOUTH][goalPit] += board[SOUTH][i];
+                board[SOUTH][i] = 0;
+            }
             return true;
-        
+        }
+        else if(total2 == 0)
+        {
+            for(int i = 0; i < goalPit; i++) 
+            {
+                board[NORTH][goalPit] += board[NORTH][i];
+                board[NORTH][i] = 0;
+            }
+            return true;
+        }
         return false;
     }
     

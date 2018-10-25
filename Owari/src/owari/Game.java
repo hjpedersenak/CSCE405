@@ -35,6 +35,7 @@ public class Game {
         }
         
         System.out.println("GAME OVER!");
+        owari.printBoard();
         if(owari.tie())
             System.out.println("It's a tie!");
         else{
