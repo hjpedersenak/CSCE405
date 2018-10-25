@@ -33,12 +33,17 @@ public class Game {
             currentPlayer = owari.getCurrentPlayer();
             owari.printBoard();
         }
+        
+        System.out.println("GAME OVER!");
+        System.out.println("The winner is player " + owari.getWinner() + "!");
+        System.out.println("CONGRATULATIONS!");
+        System.out.println("===================================================");
     }
     
     public int getWhoMoveFirst()
     {
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("Enter 1 if you want to play first, 2 if you want to play second"); // 1 is north, 2 south // i think i have a logic error here.
+        System.out.println("Enter 1 if you want to play first, 2 if you want to play second");
         int whoMoveFirst = keyboard.nextInt();
         keyboard.nextLine();
         if (whoMoveFirst == 1)
