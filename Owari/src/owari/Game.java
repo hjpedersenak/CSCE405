@@ -35,8 +35,14 @@ public class Game {
         }
         
         System.out.println("GAME OVER!");
-        System.out.println("The winner is player " + owari.getWinner() + "!");
-        System.out.println("CONGRATULATIONS!");
+        if(owari.tie())
+            System.out.println("It's a tie!");
+        else{
+            System.out.println("The winner is " + owari.getWinner() + "!");
+            System.out.println("CONGRATULATIONS!");
+        }
+        
+        
         System.out.println("===================================================");
     }
     

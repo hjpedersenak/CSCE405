@@ -166,6 +166,13 @@ public class Owari {
         return false;
     }
     
+    public boolean tie()
+    {
+        if (board[SOUTH][goalPit] == board[NORTH][goalPit])
+            return true;
+        return false;
+    }
+    
     public String getWinner()
     {
         if(board[SOUTH][goalPit] > board[NORTH][goalPit])
