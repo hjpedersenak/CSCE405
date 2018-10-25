@@ -11,14 +11,6 @@ import java.util.*;
  */
 public class HumanPlayer {
     
-    private int turn;
-    private Owari owari;
-    
-    public HumanPlayer(int turn)
-    {
-       this.turn = turn;
-    }
-    
     public int humanTurn(Owari owari)
     {
         Scanner keyboard = new Scanner(System.in);

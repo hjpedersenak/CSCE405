@@ -20,20 +20,18 @@ public class Owari {
     private int NORTH = 0;
     private int SOUTH = 1;
     private int totalPlayers = 2;
-    private int AITurn;
-    private int playerTurn;
     private int goalPit = 6;
     
     public Owari(int playerTurn)
     {
-        this.playerTurn = playerTurn-1;
-        if(playerTurn == 1){
-            AITurn = 0;
-        }
-        else{
-            AITurn = 1;
-        }
-        currentPlayer = 0;
+//        this.playerTurn = playerTurn-1;
+//        if(playerTurn == 1){
+//            AITurn = 0;
+//        }
+//        else{
+//            AITurn = 1;
+//        }
+        currentPlayer = playerTurn;
 
         
         
