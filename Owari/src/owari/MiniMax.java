@@ -40,16 +40,15 @@ public class MiniMax
         int alpha = Integer.MIN_VALUE;
         int beta = Integer.MAX_VALUE;
         Owari gamestate = new Owari(board);
-        result = minimax(maxLevel, alpha, beta, copyFrom(board));
+        result = minimax(maxLevel, alpha, beta, copyFrom(gamestate));
         return result[PIT];
     }
     
     public int[] minimax(int level, int alpha, int beta, Owari game)
     {
-        
         int[] result = new int[2];
         int[][] boardState = game.getBoard();
-        if(level == 0)
+        if(level == 0 || game.endGame() == true)
         {
             return result;
         }
@@ -78,13 +77,24 @@ public class MiniMax
             }
             else //minimize, lower beta
             {
+                int side = 0;
                 for(int i = 0; i < 6; i++)
                 {
-                    if(boardState[0][i] != 0)
+                    if(boardState[side][i] != 0)
                     {
-                        
+                        Owari testGame = copyFrom(game);
+                        testGame.moveStones(side, i);
+                        int test[] = minimax(level - 1, alpha, beta, copyFrom(game));
+                        if(test[VALUE] < beta)
+                        {
+                            beta = test[VALUE];
+                            result = test;
+                        }
+                        if(alpha >= beta)
+                            break;
                     }
                 }
+                return result;
                 
                 
             }
