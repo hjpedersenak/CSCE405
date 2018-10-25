@@ -19,23 +19,11 @@ public class Owari {
     private int NORTH = 0;
     private int SOUTH = 1;
     private int totalPlayers = 2;
-    private int AITurn;
-    private int playerTurn;
     private int goalPit = 6;
     
     public Owari(int playerTurn)
     {
-        this.playerTurn = playerTurn-1;
-        if(playerTurn == 1){
-            AITurn = 0;
-        }
-        else{
-            AITurn = 1;
-        }
-        currentPlayer = 0;
-
-        
-        
+        currentPlayer = playerTurn;
         board = new int [totalPlayers][boardLength];
         for(int i = 0; i < totalPlayers; i++)
         {
@@ -45,6 +33,18 @@ public class Owari {
                     board[i][j] = 0;
                 else
                     board[i][j] = 3;
+            }
+        }
+    }
+    
+    public Owari(int[][] newBoard)
+    {
+        board = new int [totalPlayers][boardLength];
+        for(int i = 0; i < totalPlayers; i++)
+        {
+            for(int j = 0; j < boardLength; j++)
+            {
+                board[i][j] = newBoard[i][j];
             }
         }
     }
@@ -68,6 +68,11 @@ public class Owari {
     
     public int getBoard(int side, int pitNumber) {
         return board[side][pitNumber];
+    }
+    
+    public int[][] getBoard()
+    {
+        return board;
     }
 
     public void setBoard(int side, int pitNumber, int value) {
@@ -96,11 +101,6 @@ public class Owari {
                currentPit = 0;
             }
             board[currentSide][currentPit]++;
-//                if (getBoard(currentSide, currentPit) > 1 && currentPit != goalPit) //ignore this part, probably wrong. 
-//            {
-//                stoneInHand = getBoard(currentSide, currentPit);
-//                setBoard(currentSide, currentPit, 0);
-//            }
         }
         checkCapture(currentPit, currentSide);
     }
@@ -117,7 +117,7 @@ public class Owari {
         return false;
     }
     
-    private int getOppositePit(int pitNumber) // I am too stupid to do it any other way
+    private int getOppositePit(int pitNumber) // I am too stupid to do it any other way. I can't do math.
     {
         switch(pitNumber)
         {
@@ -167,14 +167,32 @@ public class Owari {
     
     public boolean endGame()
     {
-        for(int i = 0; i < totalPlayers; i++)
+        // check if either side is empty
+        int total1 = 0;
+        int total2 = 0;
+        for(int i = 0; i < goalPit; i++)
         {
-            for(int j = 0; j < goalPit; j++)
-            {
-                if(getBoard(i, j) > 0)
-                    return false;
-            }
+            total1 += getBoard(0, i);
+            total2 += getBoard(1, i);
         }
-        return true;
+
+        if(total1 == 0 || total2 == 0)
+            return true;
+        
+        return false;
+    }
+    
+    public boolean tie()
+    {
+        if (board[SOUTH][goalPit] == board[NORTH][goalPit])
+            return true;
+        return false;
+    }
+    
+    public String getWinner()
+    {
+        if(board[SOUTH][goalPit] > board[NORTH][goalPit])
+            return "South";
+        return "North";
     }
 }

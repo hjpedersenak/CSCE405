@@ -3,33 +3,77 @@ package owari;
 import java.util.Scanner;
 
 public class Game {
-
+    
+    public static int human = 0;
+    public static int AI = 1;
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
         String mode;
-        int whoMoveFirst;
         System.out.println("Welcome to Owari!");
         // play against AI minimax
-        System.out.println("Enter 1 if you want to play first, 2 if you want to play second"); //
-        whoMoveFirst = keyboard.nextInt();
-        keyboard.nextLine();
-        Owari owari = new Owari(whoMoveFirst);
+        Game game = new Game();
+        int currentPlayer = game.getWhoMoveFirst();
+        Owari owari = new Owari(currentPlayer);
+        HumanPlayer human = new HumanPlayer();
         owari.printBoard();
 
         while (!owari.endGame()) {
-            System.out.print("Player " + owari.getCurrentPlayer() + ", enter your selected pitNumber (0-5): ");
-            int pitNumber = keyboard.nextInt();
-            keyboard.nextLine();
-            while (pitNumber > 5 || pitNumber < 0 || owari.getBoard(owari.getCurrentPlayer(), pitNumber) == 0) { // check for out of bound and empty pits
-                System.out.println("INVALID MOVE, enter your selected pitNumber (0-5)");
-                pitNumber = keyboard.nextInt();
-                keyboard.nextLine();
+            int pitNumber = -1;
+            System.out.print("Player " + game.getWhoseTurn(currentPlayer) + ", enter your selected pitNumber (0-5): ");
+            if (currentPlayer == AI)
+            {
+                pitNumber = human.humanTurn(owari); // call AI later
             }
-
+            else
+            {
+                pitNumber = human.humanTurn(owari);
+            }
             owari.moveStones(owari.getCurrentPlayer(), pitNumber);
             owari.switchTurn();
+            currentPlayer = owari.getCurrentPlayer();
             owari.printBoard();
         }
+        
+        System.out.println("GAME OVER!");
+        if(owari.tie())
+            System.out.println("It's a tie!");
+        else{
+            System.out.println("The winner is " + owari.getWinner() + "!");
+            System.out.println("CONGRATULATIONS!");
+        }
+        
+        
+        System.out.println("===================================================");
     }
+    
+    public int getWhoMoveFirst()
+    {
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("Enter 1 if you want to play first, 2 if you want to play second");
+        int whoMoveFirst = keyboard.nextInt();
+        keyboard.nextLine();
+        if (whoMoveFirst == 1)
+            return AI;
+        return human;
+    }
+    
+//    public String getWhoseTurn(String currentPlayer)
+//    {
+//        if(currentPlayer.equals("AI"))
+//        {
+//            return "Human";
+//        }
+//        return "AI";
+//    }
+//    
+    public String getWhoseTurn(int currentPlayer)
+    {
+        if(currentPlayer == human)
+        {
+            return "North";
+        }
+        return "South";
+    }
+    
 
 }
