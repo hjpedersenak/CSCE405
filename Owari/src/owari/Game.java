@@ -19,11 +19,12 @@ public class Game {
 
         while (!owari.endGame()) {
             int pitNumber = -1;
-            System.out.print("Player " + game.getWhoseTurn(currentPlayer) + ", enter your selected pitNumber (0-5): ");
+            System.out.println("Player " + game.getWhoseTurn(currentPlayer) + ", enter your selected pitNumber (0-5): ");
             if (currentPlayer == AI)
             {
                 MiniMax turn = new MiniMax(owari, 10);
                 pitNumber = turn.minimaxWrapper();
+                System.out.println(pitNumber);
                // pitNumber = human.humanTurn(owari); // call AI later
             }
             else
