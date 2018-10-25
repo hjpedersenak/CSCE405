@@ -7,6 +7,7 @@ public class Game {
     public static int human = 0;
     public static int AI = 1;
     public static void main(String[] args) {
+        
         Scanner keyboard = new Scanner(System.in);
         String mode;
         System.out.println("Welcome to Owari!");
@@ -15,17 +16,19 @@ public class Game {
         int currentPlayer = game.getWhoMoveFirst();
         Owari owari = new Owari(currentPlayer);
         HumanPlayer human = new HumanPlayer();
+        System.out.println("Depth level for minimax: ");
+        int depth = keyboard.nextInt();
+        keyboard.nextLine();
         owari.printBoard();
-
+        
         while (!owari.endGame()) {
             int pitNumber = -1;
             System.out.println("Player " + game.getWhoseTurn(currentPlayer) + ", enter your selected pitNumber (0-5): ");
             if (currentPlayer == AI)
             {
-                MiniMax turn = new MiniMax(owari, 10);
+                MiniMax turn = new MiniMax(owari, depth);
                 pitNumber = turn.minimaxWrapper();
                 System.out.println(pitNumber);
-               // pitNumber = human.humanTurn(owari); // call AI later
             }
             else
             {
@@ -46,14 +49,13 @@ public class Game {
             System.out.println("CONGRATULATIONS!");
         }
         
-        
         System.out.println("===================================================");
     }
     
     public int getWhoMoveFirst()
     {
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("Enter 1 if you want to play first, 2 if you want to play second");
+        System.out.println("Enter 1 for AI to go first, 2 for human to go first:");
         int whoMoveFirst = keyboard.nextInt();
         keyboard.nextLine();
         if (whoMoveFirst == 1)
@@ -61,15 +63,6 @@ public class Game {
         return human;
     }
     
-//    public String getWhoseTurn(String currentPlayer)
-//    {
-//        if(currentPlayer.equals("AI"))
-//        {
-//            return "Human";
-//        }
-//        return "AI";
-//    }
-//    
     public String getWhoseTurn(int currentPlayer)
     {
         if(currentPlayer == human)
