@@ -22,7 +22,9 @@ public class Game {
             System.out.print("Player " + game.getWhoseTurn(currentPlayer) + ", enter your selected pitNumber (0-5): ");
             if (currentPlayer == AI)
             {
-                pitNumber = human.humanTurn(owari); // call AI later
+                MiniMax turn = new MiniMax(owari, 10);
+                pitNumber = turn.minimaxWrapper();
+               // pitNumber = human.humanTurn(owari); // call AI later
             }
             else
             {
