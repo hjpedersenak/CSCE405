@@ -22,20 +22,16 @@ public class MiniMax
     
     
     
-    public MiniMax(int[][] boardState, int max)
+    public MiniMax(Owari gameState, int max)
     {
-        this.board = copyFrom(boardState);
+        this.board = gameState.getBoard();
         this.maxLevel = max;
     }
     
-    public int[][] copyFrom(int[][] fromBoard)
+    public Owari copyFrom(Owari fromBoard)
     {
-        int[][] toBoard = new int[fromBoard.length][];
-        for(int i = 0; i < fromBoard.length; i++)
-        {
-            toBoard[i] = fromBoard[i].clone();
-        }
-        return toBoard;
+        Owari newState = new Owari(fromBoard.getBoard());
+        return newState;
     }
     
     public int minimaxWrapper()
@@ -43,14 +39,16 @@ public class MiniMax
         int[] result;
         int alpha = Integer.MIN_VALUE;
         int beta = Integer.MAX_VALUE;
+        Owari gamestate = new Owari(board);
         result = minimax(maxLevel, alpha, beta, copyFrom(board));
         return result[PIT];
     }
     
-    public int[] minimax(int level, int alpha, int beta, int[][] boardState)
+    public int[] minimax(int level, int alpha, int beta, Owari game)
     {
         
         int[] result = new int[2];
+        int[][] boardState = game.getBoard();
         if(level == 0)
         {
             return result;
@@ -63,7 +61,7 @@ public class MiniMax
                 {
                     if(boardState[1][i] != 0)
                     {
-                        int test[] = minimax(level - 1, alpha, beta, copyFrom(boardState));
+                        int test[] = minimax(level - 1, alpha, beta, copyFrom(game));
                         if(test[VALUE] > alpha)
                         {
                             alpha = test[VALUE];
