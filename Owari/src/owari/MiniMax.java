@@ -57,10 +57,13 @@ public class MiniMax
         {
             if(level % 2 == US) //maximize, raise alpha
             {
+                int side = 1;
                 for(int i = 0; i < 6; i++)
                 {
-                    if(boardState[1][i] != 0)
+                    if(boardState[side][i] != 0)
                     {
+                        Owari testGame = copyFrom(game);
+                        testGame.moveStones(side, i);
                         int test[] = minimax(level - 1, alpha, beta, copyFrom(game));
                         if(test[VALUE] > alpha)
                         {
