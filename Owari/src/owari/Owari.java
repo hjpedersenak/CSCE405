@@ -38,6 +38,18 @@ public class Owari {
         }
     }
     
+    public Owari(int[][] newBoard)
+    {
+        board = new int [totalPlayers][boardLength];
+        for(int i = 0; i < totalPlayers; i++)
+        {
+            for(int j = 0; j < boardLength; j++)
+            {
+                board[i][j] = newBoard[i][j];
+            }
+        }
+    }
+    
     public void printBoard()
     {
         // NORTH is reversed, so pit number 1 is the most right pit
@@ -57,6 +69,11 @@ public class Owari {
     
     public int getBoard(int side, int pitNumber) {
         return board[side][pitNumber];
+    }
+    
+    public int[][] getBoard()
+    {
+        return board;
     }
 
     public void setBoard(int side, int pitNumber, int value) {
