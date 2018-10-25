@@ -17,10 +17,8 @@ public class MiniMax
     private final int PIT = 0;
     private final int VALUE = 1;
     private final int US = 0;
-    private final int THEM = 1;
     private final int maxLevel;
-    
-    
+    private int[] result = new int[2];
     
     public MiniMax(Owari gameState, int max)
     {
@@ -36,7 +34,6 @@ public class MiniMax
     
     public int minimaxWrapper()
     {
-        int[] result;
         int alpha = Integer.MIN_VALUE;
         int beta = Integer.MAX_VALUE;
         Owari gamestate = new Owari(board);
@@ -46,7 +43,6 @@ public class MiniMax
     
     public int[] minimax(int level, int alpha, int beta, Owari game)
     {
-        int[] result = new int[2];
         int[][] boardState = game.getBoard();
         if(level == 0 || game.endGame() == true)
         {
@@ -57,13 +53,18 @@ public class MiniMax
             if(level % 2 == US) //maximize, raise alpha
             {
                 int side = 1;
+                int oldScore = boardState[side][6];
                 for(int i = 0; i < 6; i++)
                 {
                     if(boardState[side][i] != 0)
                     {
                         Owari testGame = copyFrom(game);
                         testGame.moveStones(side, i);
-                        int test[] = minimax(level - 1, alpha, beta, copyFrom(game));
+                        int[][] newState = testGame.getBoard();
+                        int newScore = newState[side][6];
+                        result[VALUE] = newScore - oldScore;
+                        int test[] = minimax(level - 1, alpha, beta, copyFrom(testGame));
+                        test[PIT] = i;
                         if(test[VALUE] > alpha)
                         {
                             alpha = test[VALUE];
@@ -78,13 +79,18 @@ public class MiniMax
             else //minimize, lower beta
             {
                 int side = 0;
+                int oldScore = boardState[side][6];
                 for(int i = 0; i < 6; i++)
                 {
                     if(boardState[side][i] != 0)
                     {
                         Owari testGame = copyFrom(game);
                         testGame.moveStones(side, i);
-                        int test[] = minimax(level - 1, alpha, beta, copyFrom(game));
+                        int[][] newState = testGame.getBoard();
+                        int newScore = newState[side][6];
+                        result[VALUE] = newScore - oldScore;
+                        int test[] = minimax(level - 1, alpha, beta, copyFrom(testGame));
+                        test[PIT] = i;
                         if(test[VALUE] < beta)
                         {
                             beta = test[VALUE];
@@ -95,11 +101,7 @@ public class MiniMax
                     }
                 }
                 return result;
-                
-                
             }
         }
     }
-    
-    
 }
