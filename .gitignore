@@ -2,8 +2,9 @@
 /Owari
 /TravelingSalesperson
 /Eightpuzzle
+*
 
 #Except for
-
+!*/
 !.gitignore
 !/Sudoku/src/sudoku/*
