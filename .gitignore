@@ -1,7 +1,9 @@
-/EightPuzzle
+#Ignore everything
+/Owari
 /TravelingSalesperson
+/Eightpuzzle
 
-/Owari/nbproject
-Owari/manifest.mf
-Owari/build.xml
-/Owari/build/
+#Except for
+
+!.gitignore
+!/Sudoku/src/sudoku/*
