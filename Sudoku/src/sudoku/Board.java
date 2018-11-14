@@ -30,4 +30,27 @@ public class Board
             System.out.println();
         }
     }
+    
+    public int[] returnColumn(int index) //may be unnecessary but it's here if we need it
+    {
+        int[] column = new int[9];
+        for(int i = 0; i < 9; i++)
+        {
+            column[i] = fullBoard[i][index];
+//            System.out.println(column[i]);
+        }
+        return column;
+    }
+    
+    public int[] returnRow(int index) //may be unnecessary but it's here if we need it
+    {
+        int[] row = new int[9];
+        for(int i = 0; i < 9; i++)
+        {
+            row[i] = fullBoard[index][i];
+//            System.out.print(row[i]);
+        }
+//        System.out.println();
+        return row;
+    }
 }
