@@ -16,7 +16,7 @@ public class Sudoku
         
         System.out.println("Welcome to Sudoku Solver.\nWhat is the filename to read from?");
         filename = keyboard.nextLine();
-        try
+        try //this will input the format in the Extreme Difficulty puzzles posted on Blackboard
         {
             file = new Scanner(new File(filename));
             while(file.hasNext())
