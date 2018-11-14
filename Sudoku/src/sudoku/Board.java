@@ -4,7 +4,7 @@ package sudoku;
 
 public class Board 
 {
-    private int[][] fullBoard = new int[9][9];
+    private final int[][] fullBoard = new int[9][9];
     
     public Board(String input)
     {
@@ -42,23 +42,44 @@ public class Board
     public int[] returnColumn(int index) //may be unnecessary but it's here if we need it
     {
         int[] column = new int[9];
-        for(int i = 0; i < 9; i++)
+        if(index >= 0 && index <= 9)
         {
-            column[i] = fullBoard[i][index];
-//            System.out.println(column[i]);
+            for(int i = 0; i < 9; i++)
+            {
+                column[i] = fullBoard[i][index];
+    //            System.out.println(column[i]);
+            }
+            return column;
         }
-        return column;
+        else
+        {
+            System.out.println("Invalid index. Must be an integer between 0 and 9. Returning blank column.");
+            return column;
+        }
     }
     
     public int[] returnRow(int index) //may be unnecessary but it's here if we need it
     {
         int[] row = new int[9];
-        for(int i = 0; i < 9; i++)
+        if(index >= 0 && index <= 9)
         {
-            row[i] = fullBoard[index][i];
-//            System.out.print(row[i]);
+            for(int i = 0; i < 9; i++)
+            {
+                row[i] = fullBoard[index][i];
+    //            System.out.print(row[i]);
+            }
+    //        System.out.println();
+            return row;
         }
-//        System.out.println();
-        return row;
+        else
+        {
+            System.out.println("Invalid index. Must be an integer between 0 and 9. Returning blank row.");
+            return row;
+        }
     }
+    
+//    public int[][] returnBox(int index)
+//    {
+//        
+//    }
 }
