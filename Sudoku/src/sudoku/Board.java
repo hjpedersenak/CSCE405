@@ -1,6 +1,8 @@
 
 package sudoku;
 
+import java.util.HashSet;
+
 
 public class Board 
 {
@@ -17,6 +19,32 @@ public class Board
                 counter++;
             }
         }
+    }
+    
+    public boolean isValid() //currently only tests rows and columns, not boxes
+    {
+        boolean valid = true;
+        HashSet<Integer> testerCol = new HashSet<>();
+        HashSet<Integer> testerRow = new HashSet<>();
+        for(int i = 0; i < 9; i++)
+        {
+            testerCol.clear();
+            testerRow.clear();
+            for(int j = 0; j < 9; j++)
+            {
+                if(testerCol.add(fullBoard[i][j]) == false) //since sets can't have duplicates, this returns false if a value appears more than once
+                {
+                    valid = false;
+                    break;
+                }
+                if(testerRow.add(fullBoard[j][i]) == false)
+                {
+                    valid = false;
+                    break;
+                }
+            }
+        }
+        return valid;
     }
     
     public void printBoard()
