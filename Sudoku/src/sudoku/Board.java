@@ -34,7 +34,7 @@ public class Board
             System.out.println();
             if(column == 2 || column == 5)
             {
-                //not sure how to print a nice horizontal divider yet
+                System.out.print("* * * * * * * * * * *\n");
             }
         }
     }
@@ -83,3 +83,5 @@ public class Board
 //        
 //    }
 }
+
+// /Users/Hanna/Desktop/LS/AI/CSCE405/Sudoku/src/sudoku/17-1.txt
