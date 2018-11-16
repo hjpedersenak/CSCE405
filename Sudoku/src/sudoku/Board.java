@@ -78,7 +78,11 @@ public class Board {
     {
         initializeMoves();
         checkSingles();
-        
+        while(toProcess.peek() != null)
+        {
+            removeOptions();
+        }
+        printBoard();
         return true;
     }
     
@@ -134,6 +138,9 @@ public class Board {
         int row = process[1];
         int num = process[2];
         int index;
+        int rowStart = (row / 3) * 3;
+        int colStart = (col / 3) * 3;
+        
         for(int i = 0; i < 9; i++)
         {
             index = moveList[col][i].indexOf(num); //remove solved num from rows
@@ -157,6 +164,16 @@ public class Board {
                     addToQueue(i, row);
                 }
             }
+            index = moveList[colStart + (i%3)][rowStart + (i%3)].indexOf(num); //supposedly removes solved num from boxes?
+            if(index != -1)
+            {
+                fullBoard[colStart + (i%3)][rowStart + (i%3)] = moveList[colStart + (i%3)][rowStart + (i%3)].remove(index);
+                moveList[colStart + (i%3)][rowStart + (i%3)].trimToSize();
+                if(moveList[colStart + (i%3)][rowStart + (i%3)].size() == 1)
+                {
+                    addToQueue(colStart + (i%3), rowStart + (i%3));
+                }
+            } //index calculation taken from https://codereview.stackexchange.com/questions/37430/sudoku-solver-in-c
         }
     }
 
