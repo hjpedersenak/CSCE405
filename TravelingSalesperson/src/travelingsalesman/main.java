@@ -11,7 +11,7 @@ public class main
         int numCities = -1;
         char repeat = 'y';
         final int maxRuns = 5;
-        String results[][] = new String[6][3];
+        String results[][] = new String[6][4];
         results[0][0] = "     ";
         results[1][0] = "Run 1";
         results[2][0] = "Run 2";
@@ -20,6 +20,7 @@ public class main
         results[5][0] = "Run 5";
         results[0][1] = "Hill";
         results[0][2] = "SimA";
+        results[0][3] = "Start";
 
         System.out.println("Hello, Traveling Salesperson.");
         do
@@ -39,6 +40,7 @@ public class main
                     ArrayList<Integer> tour = new ArrayList<>(cg.makeTour(cg));
                     results[i][1] = Integer.toString(hc.runTest(tour));
                     results[i][2] = Integer.toString(sn.simulatedAnnealing(tour));
+                    results[i][3] = Integer.toString(hc.calcCost(tour));
                 }
                 print(results);
             }

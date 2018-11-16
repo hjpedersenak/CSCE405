@@ -23,7 +23,7 @@ public class Game {
 
         while (!owari.endGame()) {
             int pitNumber = -1;
-            System.out.println("Player " + game.getWhoseTurn(currentPlayer) + ", enter your selected pitNumber (0-5): ");
+            System.out.println("Player " + game.getWhoseTurn(currentPlayer).toUpperCase() + ", enter your selected pitNumber (0-5): ");
             if (currentPlayer == AI)
             {
                 MiniMax turn = new MiniMax(owari, depth);

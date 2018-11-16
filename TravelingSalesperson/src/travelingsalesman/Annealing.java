@@ -9,7 +9,7 @@ public class Annealing {
 
     // resource: http://www.theprojectspot.com/tutorial-post/simulated-annealing-algorithm-for-beginners/6
     private double temp = 10000;
-    private double coolingRate = 0.003;
+    private double coolingRate = 0.00003;
     private final CostGraph snGraph;
     private ArrayList<Integer> tour;
     private final int numCities;

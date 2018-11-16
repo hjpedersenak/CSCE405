@@ -9,3 +9,7 @@
 !.gitignore
 !/Sudoku/src/sudoku/*
 /Sudoku/build/
+/ID3/ID3/nbproject/private/
+/ID3/ID3/build/
+/ID3/build/
+/ID3/dist/

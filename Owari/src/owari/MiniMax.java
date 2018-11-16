@@ -104,4 +104,15 @@ public class MiniMax
             }
         }
     }
+    
+    public int scoreStones(int stones, int pitNumber)
+    {
+        
+        
+        
+        return 0;
+    }
+    
+    
+    
 }
