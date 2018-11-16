@@ -51,20 +51,20 @@ public class Board {
         return false;
     }
     
-    public boolean checkNakedTriple(int row, int col, int num) {
-        int r = row - row % 3;
-        int c = col - col % 3;
-
-        for (int i = r; i < r + 3; i++) {
-            for (int j = c; j < c + 3; j++) {
-                if (fullBoard[i][j] == num) {
-                    return true;
-                }
-                
-            }
-        }
-        return false;
-    }
+//    public boolean checkNakedTriple(int row, int col, int num) {
+//        int r = row - row % 3;
+//        int c = col - col % 3;
+//
+//        for (int i = r; i < r + 3; i++) {
+//            for (int j = c; j < c + 3; j++) {
+//                if (fullBoard[i][j] == num) {
+//                    return true;
+//                }
+//                
+//            }
+//        }
+//        return false;
+//    }
 
     // combination of all checks
     public boolean isValid(int row, int col, int num) {
@@ -95,7 +95,6 @@ public class Board {
 
     public boolean isValid() //currently only tests rows and columns, not boxes
     {
-        boolean valid = true;
         HashSet<Integer> testerCol = new HashSet<>();
         HashSet<Integer> testerRow = new HashSet<>();
 
@@ -107,16 +106,14 @@ public class Board {
             for (int j = 0; j < 9; j++) {
                 if (testerCol.add(fullBoard[i][j]) == false) //since sets can't have duplicates, this returns false if a value appears more than once
                 {
-                    valid = false;
-                    break;
+                    return false;
                 }
                 if (testerRow.add(fullBoard[j][i]) == false) {
-                    valid = false;
-                    break;
+                    return false;
                 }
             }
         }
-        return valid;
+        return true;
     }
     
     public boolean solvePuzzle() {
@@ -157,42 +154,6 @@ public class Board {
             }
         }
     }
-
-    public int[] returnColumn(int index) //may be unnecessary but it's here if we need it
-    {
-        int[] column = new int[9];
-        if (index >= 0 && index <= 9) {
-            for (int i = 0; i < 9; i++) {
-                column[i] = fullBoard[i][index];
-                //            System.out.println(column[i]);
-            }
-            return column;
-        } else {
-            System.out.println("Invalid index. Must be an integer between 0 and 9. Returning blank column.");
-            return column;
-        }
-    }
-
-    public int[] returnRow(int index) //may be unnecessary but it's here if we need it
-    {
-        int[] row = new int[9];
-        if (index >= 0 && index <= 9) {
-            for (int i = 0; i < 9; i++) {
-                row[i] = fullBoard[index][i];
-                //            System.out.print(row[i]);
-            }
-            //        System.out.println();
-            return row;
-        } else {
-            System.out.println("Invalid index. Must be an integer between 0 and 9. Returning blank row.");
-            return row;
-        }
-    }
-
-//    public int[][] returnBox(int index)
-//    {
-//        
-//    }
 }
 
 // reference: https://www.baeldung.com/java-sudoku

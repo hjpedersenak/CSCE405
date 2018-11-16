@@ -8,3 +8,4 @@
 !*/
 !.gitignore
 !/Sudoku/src/sudoku/*
+/Sudoku/build/

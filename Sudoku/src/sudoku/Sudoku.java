@@ -28,6 +28,10 @@ public class Sudoku
             
             Board board = new Board(rawInput);
             board.printBoard();
+            System.out.println("Board has been initalized. Solving...");
+            board.solve();
+            board.printBoard();
+            System.out.println("Board solved! Exiting.");
             
         }
         catch(FileNotFoundException e)
