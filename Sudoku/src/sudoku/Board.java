@@ -1,11 +1,13 @@
 package sudoku;
 
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class Board {
 
-    private final int[][] fullBoard = new int[9][9];
-    private final ArrayList<Integer>[][] moveList = new ArrayList[9][9];
+    private int[][] fullBoard = new int[9][9];
+    private ArrayList<Integer>[][] moveList = new ArrayList[9][9];
+    private Queue<int[]> toProcess;
 
     public Board(String input) {
         int counter = 0;
@@ -75,6 +77,7 @@ public class Board {
     public boolean constraintSolve()
     {
         initializeMoves();
+        checkSingles();
         
         return true;
     }
@@ -94,6 +97,64 @@ public class Board {
                             moveList[col][row].add(num);
                         }
                     }
+                }
+            }
+        }
+    }
+    
+    public void checkSingles() //any cell with only one available move is solved, added to a queue to remove num from neighbors
+    {
+        for(int col = 0; col < 9; col++)
+        {
+            for(int row = 0; row < 9; row++)
+            {
+                if(fullBoard[col][row] == 0 && moveList[col][row].size() == 1)
+                {
+                    addToQueue(col, row);
+                }
+            }
+        }
+    }
+    
+    public void addToQueue(int col, int row)
+    {
+        fullBoard[col][row] = moveList[col][row].remove(0);
+        moveList[col][row].clear();
+        int[] solved = new int[3];
+        solved[0] = col;
+        solved[1] = row;
+        solved[2] = fullBoard[col][row];
+        toProcess.add(solved);
+    }
+    
+    public void removeOptions()
+    {
+        int[] process = toProcess.poll();
+        int col = process[0];
+        int row = process[1];
+        int num = process[2];
+        int index;
+        for(int i = 0; i < 9; i++)
+        {
+            index = moveList[col][i].indexOf(num); //remove solved num from rows
+            if(index != -1)
+            {
+                fullBoard[col][i] = moveList[col][i].remove(index);
+                moveList[col][i].trimToSize();
+                if(moveList[col][i].size() == 1)
+                {
+                    addToQueue(col, i);
+                }
+            }
+            
+            index = moveList[i][row].indexOf(num); //remove solved num from cols
+            if(index != -1)
+            {
+                fullBoard[i][row] = moveList[i][row].remove(index);
+                moveList[i][row].trimToSize();
+                if(moveList[i][row].size() == 1)
+                {
+                    addToQueue(i, row);
                 }
             }
         }
