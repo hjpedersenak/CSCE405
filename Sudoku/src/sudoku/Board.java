@@ -1,10 +1,11 @@
 package sudoku;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class Board {
 
     private final int[][] fullBoard = new int[9][9];
+    private final ArrayList<Integer>[][] moveList = new ArrayList[9][9];
 
     public Board(String input) {
         int counter = 0;
@@ -70,6 +71,33 @@ public class Board {
     public boolean isValid(int row, int col, int num) {
         return !inRow(row, num) && !inCol(col, num) && !in3X3(row, col, num);
     }
+    
+    public boolean constraintSolve()
+    {
+        initializeMoves();
+        
+        return true;
+    }
+    
+    public void initializeMoves() //this monstrosity initializes all available moves for every blank cell
+    {
+        for(int num = 1; num <= 9; num++)
+        {
+            for(int col = 0; col < 9; col++)
+            {
+                for(int row = 0; row < 9; row++)
+                {
+                    if(fullBoard[col][row] == 0)
+                    {
+                        if(isValid(col, row, num))
+                        {
+                            moveList[col][row].add(num);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     // solve using is valid method 
     public boolean solve() {
@@ -93,52 +121,50 @@ public class Board {
         return true;
     }
 
-    public boolean isValid() //currently only tests rows and columns, not boxes
-    {
-        HashSet<Integer> testerCol = new HashSet<>();
-        HashSet<Integer> testerRow = new HashSet<>();
-
-        int number = 9;
-
-        for (int i = 0; i < 9; i++) {
-            testerCol.clear();
-            testerRow.clear();
-            for (int j = 0; j < 9; j++) {
-                if (testerCol.add(fullBoard[i][j]) == false) //since sets can't have duplicates, this returns false if a value appears more than once
-                {
-                    return false;
-                }
-                if (testerRow.add(fullBoard[j][i]) == false) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+//    public boolean isValid() //currently only tests rows and columns, not boxes
+//    {
+//        HashSet<Integer> testerCol = new HashSet<>();
+//        HashSet<Integer> testerRow = new HashSet<>();
+//        
+//        for (int i = 0; i < 9; i++) {
+//            testerCol.clear();
+//            testerRow.clear();
+//            for (int j = 0; j < 9; j++) {
+//                if (testerCol.add(fullBoard[i][j]) == false) //since sets can't have duplicates, this returns false if a value appears more than once
+//                {
+//                    return false;
+//                }
+//                if (testerRow.add(fullBoard[j][i]) == false) {
+//                    return false;
+//                }
+//            }
+//        }
+//        return true;
+//    }
     
-    public boolean solvePuzzle() {
-        for (int row = 0; row < 9; row++) {
-            for (int col = 0; col < 9; col++) {
-                if (fullBoard[row][col] == 0) {
-                    for (int number = 1; number <= 9; number++) {
-                        if (isValid()) {
-                            fullBoard[row][col] = number;
-                            
-                            if (solvePuzzle()) {
-                                return true;
-                            } else {
-                                fullBoard[row][col] = 0;
-                            }
-                        }
-                    }
-                    
-                    return false;
-                }
-            }
-        }
-        
-        return true;
-    }
+//    public boolean solvePuzzle() {
+//        for (int row = 0; row < 9; row++) {
+//            for (int col = 0; col < 9; col++) {
+//                if (fullBoard[row][col] == 0) {
+//                    for (int number = 1; number <= 9; number++) {
+//                        if (isValid()) {
+//                            fullBoard[row][col] = number;
+//                            
+//                            if (solvePuzzle()) {
+//                                return true;
+//                            } else {
+//                                fullBoard[row][col] = 0;
+//                            }
+//                        }
+//                    }
+//                    
+//                    return false;
+//                }
+//            }
+//        }
+//        
+//        return true;
+//    }
 
     public void printBoard() {
         for (int column = 0; column < 9; column++) {
